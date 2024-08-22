@@ -3,5 +3,5 @@ import { CharacterView } from "./CharacterView";
 
 
 export function CharacterPage() : JSXElement {
-    return <CharacterView id
+    return <CharacterView id={0} />
 }
