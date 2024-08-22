@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
 import testRouter from "./features/test/routes/test";
+import characterRouter from "./features/characters/routes/character";
 
 
 dotenv.config();
@@ -21,4 +22,5 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use("/", testRouter);
+app.use("/character", characterRouter);
 
