@@ -3,12 +3,16 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
 import testRouter from "./features/test/routes/test";
+import characterRouter from "./features/character/routes/character";
+
 
 
 dotenv.config();
 
 const app: Express = express();
+const cors = require("cors");
 app.use(bodyParser.json());
+app.use(cors());
 
 const port = process.env.PORT || 8080;
 
@@ -21,4 +25,5 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use("/", testRouter);
+app.use("/character", characterRouter);
 
