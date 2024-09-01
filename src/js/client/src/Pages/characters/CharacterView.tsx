@@ -8,8 +8,8 @@ type CharacterViewProps = {
 }
 
 const fetchCharacter = async (id : number) => {
-
-    const res = (await fetch(`http://localhost:8080/character/${id}/`)).json();
+    console.log(`${import.meta.env.VITE_API_URL}`)
+    const res = (await fetch(`${import.meta.env.VITE_API_URL}/character/${id}/`)).json();
 
     console.log(res, id);
 
