@@ -1,5 +1,5 @@
 import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
-import { Character, Details, Stats } from "../../../../Shared/Models/index";
+import { Character, Details, Stats } from "../../../../Shared/models";
 
 
 
@@ -23,7 +23,7 @@ function DetailsView(props: {details : Details | undefined}) : JSXElement {
 }
 
 function CalcModifier(statValue: number) : number {
-    return (statValue - 10) / 2
+    return Math.floor((statValue - 10) / 2)
 }
 
 function StatView(props: {statName: string, statValue: number}) : JSXElement {
@@ -58,7 +58,6 @@ export function CharacterView(props : CharacterViewProps) : JSXElement {
             <option value={2}>Rafan</option>
             <option value={3}>Kasimir</option>
         </select>
-        {/* <input value={characterId()} onChange={newVal => setCharacterId(newVal.target.value)} /> */}
         <Suspense fallback={<div>Loading...</div>}>
             <DetailsView details={chell()?.details} />
             <StatsView stats={chell()?.stats} />

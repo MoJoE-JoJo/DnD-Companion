@@ -1,4 +1,4 @@
-import {Character } from "../../../../Shared/Models/index";
+import {Character } from "../../../../Shared/models";
 
 
 export function getCharacter(id: string): Character {
