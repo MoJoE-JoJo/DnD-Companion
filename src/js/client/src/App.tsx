@@ -1,16 +1,26 @@
-import type { Component } from 'solid-js';
+import { CharacterPage } from './Pages/characters/CharacterPage';
+import { Navigate, Route, Router } from '@solidjs/router';
 
 import styles from './App.module.css';
-import { CharacterPage } from './Pages/characters/CharacterPage';
+import { JSXElement } from 'solid-js';
+import { Login } from './Pages/Login/Login';
 
-const App: Component = () => {
-  return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <CharacterPage />
-      </header>
-    </div>
-  );
+function Root(props: { children?: JSXElement }) : JSXElement {
+  return <div class={styles.App}>
+    <header class={styles.header}>
+      {props.children}
+    </header>
+  </div>
+}
+
+
+
+const App = () => {
+  return <Router root={Root}>
+    <Route path={"/"} component={() => <Navigate href="/login" />} />
+    <Route path={"/login"} component={() => <Login />} />
+    <Route path={"/characterpage"} component={() => <CharacterPage />} />
+  </Router>;
 };
 
 export default App;

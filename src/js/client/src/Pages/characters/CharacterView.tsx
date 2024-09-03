@@ -51,7 +51,6 @@ export function CharacterView(props : CharacterViewProps) : JSXElement {
         <select name="Character" onChange={(e) => {
             const id = Number(e.currentTarget.value)
             setCharacterId(id);
-            console.log(id)
         }}>
             <option value={0}>Chell</option>
             <option value={1}>Fleck</option>
