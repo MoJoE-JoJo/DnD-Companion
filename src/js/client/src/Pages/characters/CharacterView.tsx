@@ -1,7 +1,5 @@
 import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
-import { Character, Details, Stats } from "../../../../Shared/models";
-
-
+import { Details, Stats } from "../../../../Shared/models";
 
 type CharacterViewProps = {
     id: number
