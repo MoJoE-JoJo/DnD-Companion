@@ -4,8 +4,7 @@ import dotenv from "dotenv";
 
 import testRouter from "./features/test/routes/test";
 import characterRouter from "./features/character/routes/character";
-
-
+import { testDatabaseConnection } from "./Database/DatabaseConnection";
 
 dotenv.config();
 
@@ -20,10 +19,13 @@ app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
+testDatabaseConnection().then(() => {
+  console.log("Hello");
+});
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("Express + TypeScript Server");
 });
 
 app.use("/", testRouter);
 app.use("/character", characterRouter);
-

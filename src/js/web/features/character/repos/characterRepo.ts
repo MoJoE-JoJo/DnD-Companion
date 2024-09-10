@@ -1,23 +1,39 @@
+import { ObjectId } from "mongodb";
 import {Character } from "../../../../Shared/models";
+import { getClient } from "../../../Database/DatabaseConnection";
 
 
-export function getCharacter(id: string): Character {
-    switch (id) {
-        case "0":
-            return getChell();
-        case "1":
-            return getBaseCharacter("Fleck");
-        case "2":
-            return getBaseCharacter("Rafan");
-        case "3":
-            return getBaseCharacter("Kasimir");
-        default:
-            return getChell();
-    }
+const collectionString = 'characters';
+
+// export function getCharacter(id: string): Character {
+//     switch (id) {
+//         case "0":
+//             return getChell();
+//         case "1":
+//             return getBaseCharacter("Fleck");
+//         case "2":
+//             return getBaseCharacter("Rafan");
+//         case "3":
+//             return getBaseCharacter("Kasimir");
+//         default:
+//             return getChell();
+//     }
+// }
+
+export async function getCharacter(id: string): Promise<Character | null> {
+    // connect to db
+    var client = await getClient();
+    // execute on collec
+
+    var collection = client.db('dnd-app').collection<Character>('collectionString');
+
+    var res = await collection.findOne<Character>({ _id: new ObjectId(id) });
+    return res;
 }
 
 function getBaseCharacter(name: string) : Character {
     return {
+        _id: undefined,
         details: {
             name: name,
             age: 42,
@@ -39,6 +55,7 @@ function getBaseCharacter(name: string) : Character {
 
 function getChell() {
     return {
+        _id: undefined,
         details: {
             name: "Chell",
             race: "Tortle",
