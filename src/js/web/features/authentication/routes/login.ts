@@ -19,6 +19,13 @@ router.post('/login', (req, res) => {
     // Create and sign a JWT
     const token = jwt.sign({ id: user.username }, getAuthKey(), { expiresIn: getAuthDuration() });
     
+    res.cookie('jwt', token, {
+        httpOnly: true,   // Prevent access via JavaScript
+        secure: false,     // Only send the cookie over HTTPS
+        sameSite: 'lax', // Protect against CSRF attacks (use 'Lax' or 'Strict')
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
+    });
+
     // Send the token to the client
     res.json({ token });
 });

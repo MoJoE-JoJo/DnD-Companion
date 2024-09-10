@@ -15,7 +15,13 @@ dotenv.config();
 const app: Express = express();
 const cors = require("cors");
 app.use(bodyParser.json());
-app.use(cors());
+
+const corsOptions = {
+  origin:  `http://localhost:3000`, // Replace with your frontend domain
+  credentials: true // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions));
 
 const port = getPort() || 8080;
 
