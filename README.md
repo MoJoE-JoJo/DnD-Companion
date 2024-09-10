@@ -11,10 +11,15 @@ npm -v
 node -v
 ```
 
-Install eslint:
+Afterwards run a npm install in both the `\client` and `\web` folder. 
+```
+npm install
+```
+
+Recommended to install eslint globally:
 
 ```
-npm install eslint
+npm install eslint -g
 ```
 
 For VS Code, install the following extensions (will make development easier):
@@ -22,3 +27,11 @@ For VS Code, install the following extensions (will make development easier):
 - JavaScript (ES6) code snippets
 - Prettier - Code formatter
 - Pretty Typescript Errors
+
+## Run the code
+
+To run locally start **both** the web and client with 
+
+```
+npm run dev
+```
