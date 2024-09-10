@@ -1,17 +1,13 @@
 import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
 import { Details, Stats } from "../../../../Shared/models";
+import { httpCall } from "../../Helpers/FetchHelper";
 
 type CharacterViewProps = {
     id: number
 }
 
 const fetchCharacter = async (id : number) => {
-    console.log(`${import.meta.env.VITE_API_URL}`)
-
-    const res = (await fetch(`${import.meta.env.VITE_API_URL}/character/${id}/`, {
-        method: 'GET',
-        credentials: 'include' // Important to include cookies in requests
-      })).json();
+    const res = await httpCall("GET", `${import.meta.env.VITE_API_URL}/character/${id}/`)
 
     console.log(res, id);
 

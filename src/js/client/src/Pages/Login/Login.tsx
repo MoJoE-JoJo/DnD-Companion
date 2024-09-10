@@ -12,9 +12,8 @@ export function Login() : JSXElement {
         httpCall("POST", `${import.meta.env.VITE_API_URL}/auth/login`, {
             username: username(),
             password: password()
-        },
-        (result) => {
-            console.log(result)
+        }, true).then(result => {
+            localStorage.setItem('jwt', result.token);
         })
     }
     
