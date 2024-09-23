@@ -1,4 +1,5 @@
-import { Collection, MongoClient } from "mongodb";
+import { Collection, MongoClient, ObjectId } from "mongodb";
+import { CharacterDB } from "./Models/CharacterDb";
 import { Character } from "../../Shared/models";
 
 export async function getClient(): Promise<MongoClient> {
@@ -12,9 +13,9 @@ export async function getClient(): Promise<MongoClient> {
 
 export async function testDatabaseConnection() {
   const client = await getClient();
-  var collection = getCollection<Character>("Characters", client);
-  const newChar: Character = {
-    _id: undefined,
+  var collection = getCollection<CharacterDB>("Characters", client);
+  const newChar: CharacterDB = {
+    _id: new ObjectId(),
     details: {
       name: "peter pedal",
       age: 42,
@@ -55,9 +56,9 @@ export async function connectToCluster(uri: string) {
 }
 
 export async function createCharacter(
-  collection: Collection<Character>,
-  character: Character
-): Promise<Character> {
+  collection: Collection<CharacterDB>,
+  character: CharacterDB
+): Promise<CharacterDB> {
   const res = await collection.insertOne(character);
   character._id = res.insertedId;
   return character;
