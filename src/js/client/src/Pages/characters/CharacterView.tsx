@@ -1,5 +1,6 @@
 import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
 import { Characteristics } from "./../../../../Shared/Character/Characteristics/Characteristics";
+import {Character} from "./../../../../Shared/Character/Character"
 import { Stats } from "./../../../../Shared/Character/Stats/Stats";
 import { AbilityScore } from "../../../../Shared/Character/Stats/Abilities";
 
@@ -7,7 +8,7 @@ type CharacterViewProps = {
     id: number
 }
 
-const fetchCharacter = async (id : number) => {
+const fetchCharacter = async (id : number): Promise<Character> => {
 
     const res = (await fetch(`http://localhost:8080/character/${id}/`)).json();
 
@@ -26,8 +27,8 @@ function CalcModifier(statValue: number) : number {
     return Math.floor((statValue - 10) / 2)
 }
 
-function StatView(props: {statName: string, statValue: AbilityScore}) : JSXElement {
-    return <div>{props.statName} score: {props.statName}. Modifier: TODO</div>
+function StatView(props: {statName: string, statValue: number}) : JSXElement {
+    return <div>{props.statName} score: {props.statName}. Modifier: {props.statValue}</div>
 }
 
 
@@ -59,7 +60,7 @@ export function CharacterView(props : CharacterViewProps) : JSXElement {
             <option value={3}>Kasimir</option>
         </select>
         <Suspense fallback={<div>Loading...</div>}>
-            <DetailsView characteristics={chell()?.details} />
+            <DetailsView characteristics={chell()?.characteristics} />
             <StatsView stats={chell()?.stats} />
         </Suspense>
     </> 

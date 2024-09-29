@@ -4,16 +4,16 @@ import { Language } from "./Language";
 import { Size } from "./Size";
 
 export type Characteristics = {
-    name: string;
-    race: string;
-    age: number;
-    size: Size;
-    appearance: Appearance;
-    faith: string | null;
-    alignment: Alignment;
-    languages: Language[];
-    personalityTraits: string[];
-    ideals: string[];
-    bonds: string[];
-    flaws: string[];
+    name: string | undefined;
+    race: string | undefined;
+    age: number | undefined;
+    size: Size | undefined;
+    appearance: Appearance | undefined;
+    faith: string | null | undefined;
+    alignment: Alignment | undefined;
+    languages: Language[] | undefined;
+    personalityTraits: string[] | undefined;
+    ideals: string[] | undefined;
+    bonds: string[] | undefined;
+    flaws: string[] | undefined;
 }

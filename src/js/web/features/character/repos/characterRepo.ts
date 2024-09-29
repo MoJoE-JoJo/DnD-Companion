@@ -1,3 +1,5 @@
+import { Alignment } from "../../../../Shared/Character/Characteristics/Alignment";
+import { Size } from "../../../../Shared/Character/Characteristics/Size";
 import {Character } from "../../../../Shared/models";
 
 
@@ -18,41 +20,83 @@ export function getCharacter(id: string): Character {
 
 function getBaseCharacter(name: string) : Character {
     return {
-        details: {
-            name: name,
+        levels: [
+            {
+                class:"fighter",
+                level: 1,
+            }
+        ],
+        characteristics: {
+            name: "PH",
+            race: undefined,
             age: 42,
-            race: "Uhhh"
+            size: Size.Medium,
+            appearance: undefined,
+            faith: undefined,
+            alignment: Alignment.Neutral,
+            languages: undefined,
+            personalityTraits: undefined,
+            ideals: undefined,
+            bonds: undefined,
+            flaws: undefined,
         },
         stats: {
-            charisma: 10,
-            constitution: 10,
-            dexterity: 10,
-            intelligence: 10,
-            strength: 10,
-            wisdom: 10
+            abilitieScores:{
+                charisma: 10,
+                constitution: 10,
+                dexterity: 10,
+                intelligence: 10,
+                strength: 10,
+                wisdom: 10
+            },
+            armorClass: 10,
+            skills: undefined,
+            savingThrows: undefined
         },
         exhaustionLevel: 0,
-        proficiencyBonus: 0
+        lingeringInjuries: undefined,
+        resources: undefined
     }
 }
 
 
 function getChell() {
     return {
-        details: {
+        levels: [
+            {
+                class:"Druid",
+                level: 12,
+            }
+        ],
+        characteristics: {
             name: "Chell",
             race: "Tortle",
-            age: 12
+            age: 12,
+            size: Size.Medium,
+            appearance: undefined,
+            faith: undefined,
+            alignment: Alignment.Neutral,
+            languages: undefined,
+            personalityTraits: undefined,
+            ideals: undefined,
+            bonds: undefined,
+            flaws: undefined,
+        },
+        stats: {
+            abilitieScores:{
+                strength: 6,
+                dexterity: 10,
+                constitution: 18,
+                intelligence: 12,
+                wisdom: 20,
+                charisma: 12
+            },
+            armorClass: 10,
+            skills: undefined,
+            savingThrows: undefined
         },
         exhaustionLevel: 3,
-        proficiencyBonus: 5,
-        stats: {
-            strength: 6,
-            dexterity: 10,
-            constitution: 18,
-            intelligence: 12,
-            wisdom: 20,
-            charisma: 12
-        }
+        lingeringInjuries: undefined,
+        resources: undefined
     };
 }

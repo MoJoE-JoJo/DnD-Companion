@@ -4,7 +4,7 @@ import { Skills } from "./Skills"
 
 export type Stats = {
     abilitieScores: AbilitieScores,
-    skills: Skills,
-    savingThrows: SavingThrows,
+    skills: Skills | undefined,
+    savingThrows: SavingThrows | undefined,
     armorClass: number
 }
