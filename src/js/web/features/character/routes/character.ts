@@ -1,10 +1,10 @@
 // @ts-ignore
 import { Router } from 'express';
-import { deleteCharacter, getAllCharacters, getCharacter } from '../repos/characterRepo';
+import { deleteCharacter, getAllCharacters, getCharacter as getMockCharacterData } from '../repos/characterRepo';
 const router = Router();
 
 router.get("/:id", async (req, res) => {
-  res.json(await getCharacter(req.params.id));
+  res.json(await getMockCharacterData(req.params.id));
 })
 
 router.delete("/:id", async (req, res) => {
