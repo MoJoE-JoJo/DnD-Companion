@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
-import characterRouter from "./features/character/routes/character";
+import characterRouter from "@Features/Character/Routes/Character";
 
 dotenv.config();
 

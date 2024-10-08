@@ -1,6 +1,6 @@
 // @ts-ignore
 import { Router } from 'express';
-import { getCharacter } from '../repos/characterRepo';
+import { getCharacter } from '../Repos/CharacterRepo';
 const router = Router();
 
 router.get("/:id", (req, res) => {
