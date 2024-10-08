@@ -1,21 +1,13 @@
-import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
+import { createResource, createEffect, createSignal, JSXElement, Show, Suspense } from "solid-js";
 import { Characteristics } from "./../../../../Shared/Character/Characteristics/Characteristics";
 import {Character} from "./../../../../Shared/Character/Character"
 import { Stats } from "./../../../../Shared/Character/Stats/Stats";
 import { AbilityScore } from "../../../../Shared/Character/Stats/Abilities";
 import { LingeringInjuriesView } from "./LingeringInjuriesView";
+import { useDndcContext } from "./../../Components/context";
 
 type CharacterViewProps = {
     id: number
-}
-
-const fetchCharacter = async (id : number): Promise<Character> => {
-
-    const res = (await fetch(`http://localhost:8080/character/${id}/`)).json();
-
-    console.log(res, id);
-
-    return res;
 }
 
 function DetailsView(props: {characteristics : Characteristics | undefined}) : JSXElement {
@@ -45,9 +37,22 @@ function StatsView(props: {stats : Stats | undefined}) : JSXElement {
 }
 
 export function CharacterView(props : CharacterViewProps) : JSXElement {
-
+    const { character, loadingCharacter, fetchCharacter } = useDndcContext();
     const [characterId, setCharacterId] = createSignal(props.id);
-    const [chell] = createResource(characterId, fetchCharacter);
+    
+    createEffect(() => {
+        const id = characterId();
+        if (id != null) {
+            fetchCharacter(id); // Fetch character data when the id changes
+        }
+    });
+
+    if (loadingCharacter())
+    {
+        return <>
+            <p>Loading character...</p>
+        </>
+    }
     
     return <>
         <select name="Character" onChange={(e) => {
@@ -61,9 +66,9 @@ export function CharacterView(props : CharacterViewProps) : JSXElement {
             <option value={3}>Kasimir</option>
         </select>
         <Suspense fallback={<div>Loading...</div>}>
-            <DetailsView characteristics={chell()?.characteristics} />
-            <StatsView stats={chell()?.stats} />
-            <LingeringInjuriesView characterId={characterId()} lingeringInjuries={chell()?.lingeringInjuries}></LingeringInjuriesView>
+            <DetailsView characteristics={character()?.characteristics} />
+            <StatsView stats={character()?.stats} />
+            <LingeringInjuriesView characterId={characterId()} lingeringInjuries={character()?.lingeringInjuries}></LingeringInjuriesView>
         </Suspense>
     </> 
 }
