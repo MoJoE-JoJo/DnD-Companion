@@ -1,13 +1,12 @@
 import { createResource, createSignal, JSXElement, Match, Setter, Show, Suspense, Switch } from "solid-js";
 import { Characteristics } from "./../../../../Shared/Character/Characteristics/Characteristics";
-import { Character, ClassLevel } from "./../../../../Shared/Character/Character"
-import { Stats } from "./../../../../Shared/Character/Stats/Stats";
-import { AbilityScore } from "../../../../Shared/Character/Stats/Abilities";
 import { Column } from "../../Components/Container.tsx/Column";
 import { Row } from "../../Components/Container.tsx/Row";
 import { Field } from "../../Components/Text/Field";
 import { Proficiency } from "../../../../Shared/Character/Stats/Proficiency";
 import { Checkbox } from "../../Components/Checkbox/Checkbox";
+import { Character } from "./../../../../Shared/Character/Character"
+import { Stats } from "./../../../../Shared/Character/Stats/Stats";
 
 type CharacterViewProps = {
     character: Character
