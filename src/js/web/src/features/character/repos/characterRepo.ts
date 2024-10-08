@@ -1,7 +1,6 @@
-import { Alignment } from "../../../../Shared/Character/Characteristics/Alignment";
-import { Size } from "../../../../Shared/Character/Characteristics/Size";
-import {Character } from "../../../../Shared/models";
-
+import { Character } from "@Models/Character/Character";
+import { Alignment } from "@Models/Character/Characteristics/Alignment";
+import { Size } from "@Models/Character/Characteristics/Size";
 
 export function getCharacter(id: string): Character {
     switch (id) {

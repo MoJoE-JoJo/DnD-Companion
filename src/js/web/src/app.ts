@@ -2,10 +2,7 @@ import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
-import testRouter from "./features/test/routes/test";
 import characterRouter from "./features/character/routes/character";
-
-
 
 dotenv.config();
 
@@ -24,6 +21,5 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
 });
 
-app.use("/", testRouter);
 app.use("/character", characterRouter);
 
