@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 
 import testRouter from "./features/test/routes/test";
 import characterRouter from "./features/character/routes/character";
-import { testDatabaseConnection } from "./Database/DatabaseConnection";
 
 dotenv.config();
 
@@ -19,9 +18,33 @@ app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
 
-testDatabaseConnection().then(() => {
-  console.log("Hello");
-});
+// const testChar : CharacterDB = {
+//   stats: {
+//     strength: 2,
+//     intelligence: 2,
+//     dexterity: 2,
+//     charisma: 2,
+//     constitution: 2,
+//     wisdom: 2
+//   },
+//   details: {
+//     name: 'Biver',
+//     race: 'bæver',
+//     age: 2
+//   },
+//   proficiencyBonus: 0,
+//   exhaustionLevel: 0,
+//   _id: new ObjectId()
+// }
+
+// createCharacter(testChar).then((res) => {
+//   console.log(res);
+// });
+
+// getAllCharacters().then((res) => {
+//   console.log(res);
+// });
+
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
