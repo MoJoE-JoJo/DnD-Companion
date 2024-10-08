@@ -15,3 +15,9 @@ export enum LingeringInjuryType {
     FesteringWound,
     LoseAnArmOrAHand
 }
+
+export type LingeringInjuryDefinition = {
+    type: LingeringInjuryType,
+    name: string,
+    rule: string
+}

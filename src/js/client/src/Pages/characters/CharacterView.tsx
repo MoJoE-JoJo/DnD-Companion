@@ -1,5 +1,4 @@
-import { createResource, createSignal, JSXElement, Match, Setter, Show, Suspense, Switch } from "solid-js";
-import { Characteristics } from "./../../../../Shared/Character/Characteristics/Characteristics";
+import { JSXElement, Match, Switch } from "solid-js";
 import { Column } from "../../Components/Container/Column";
 import { Row } from "../../Components/Container/Row";
 import { Field } from "../../Components/Text/Field";
@@ -7,6 +6,7 @@ import { Proficiency } from "../../../../Shared/Character/Stats/Proficiency";
 import { Checkbox } from "../../Components/Checkbox/Checkbox";
 import { Character, ClassLevel } from "./../../../../Shared/Character/Character"
 import { Stats } from "./../../../../Shared/Character/Stats/Stats";
+import { LingeringInjuriesView } from "./LingeringInjuriesView";
 
 type CharacterViewProps = {
     character: Character
@@ -74,5 +74,6 @@ export function CharacterView(props: CharacterViewProps): JSXElement {
     return <Column height="100%" style={{ "justify-content": "space-between" }}>
         <DetailsView character={props.character} />
         <StatsView stats={props.character.stats} />
+        <LingeringInjuriesView lingeringInjuries={props.character.lingeringInjuries}></LingeringInjuriesView>
     </Column>;
 }

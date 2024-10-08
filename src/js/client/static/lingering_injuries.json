@@ -1,0 +1,47 @@
+[
+    {
+      "type": 0,
+      "name": "Lose an Eye",
+      "rule": "You have disadvantage on Wisdom (Perception) checks that rely on sight and on ranged attack rolls. If you have no eyes left after sustaining this injury, you’re blinded. Magic such as the regenerate spell can restore the lost eye."
+    },
+    {
+      "type": 1,
+      "name": "Lose a Leg or a Foot",
+      "rule": "Your speed on foot is halved, and you must use a cane or crutch to move unless you have a peg leg or other prosthesis. You fall prone after using the Dash action. You have disadvantage on Dexterity checks made to balance. Magic such as the regenerate spell can restore the lost appendage."
+    },
+    {
+      "type": 2,
+      "name": "Limp",
+      "rule": "Your speed on foot is reduced by 5 feet. You must make a DC 10 Dexterity saving throw after using the Dash action. If you fail the save, you fall prone. Magical healing removes the limp (healing cost: 10hp)."
+    },
+    {
+      "type": 3,
+      "name": "Minor Scar",
+      "rule": "The scar doesn’t have any adverse effect. Magical healing of 6th level or higher, such as heal and regenerate, removes the scar."
+    },
+    {
+      "type": 4,
+      "name": "Broken Ribs",
+      "rule": "This has the effect as Internal Injury, except that the save DC is 10 and the healing cost is 10hp."
+    },
+    {
+      "type": 5,
+      "name": "Internal Injury",
+      "rule": "Whenever you attempt an action in combat, you must make a DC 15 Constitution saving throw. On a failed save, you lose your action and can’t use reactions until the start of your next turn. The injury heals if you receive magical healing (healing cost: 15hp) or if you spend 10 days doing nothing but resting. If the healing cost cannot be paid, the number of restful days can be reduced by 1 with a healing cost of 5hp from any source (this can be applied multiple times)."
+    },
+    {
+      "type": 6,
+      "name": "Horrible Scar",
+      "rule": "You are disfigured to the extent that the wound can’t be easily concealed. You have disadvantage on Charisma (Persuasion) checks and advantage on Charisma (Intimidation) checks. Magical healing of 6th level or higher, such as heal or regenerate, removes the scar."
+    },
+    {
+      "type": 7,
+      "name": "Festering Wound",
+      "rule": "Your hit point maximum is reduced by 1 every 24 hours the wound persists. If your hit point maximum drops to 0, you die. The wound heals if you receive magical healing (healing cost: 30hp). Alternatively, someone can tend to the wound and make a DC 15 Wisdom (Medicine) check once every 24 hours. After ten successes, the wound heals."
+    },
+    {
+      "type": 8,
+      "name": "Lose an Arm or a Hand",
+      "rule": "You can no longer hold anything with two hands, and you can hold only a single object at a time. Magic such as the regenerate spell can restore the lost appendage."
+    }
+  ]
