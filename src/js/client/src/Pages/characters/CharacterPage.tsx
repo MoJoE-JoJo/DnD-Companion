@@ -1,12 +1,13 @@
 import { createResource, createSignal, JSXElement, Setter, Show, Suspense } from "solid-js";
 import { CharacterView } from "./CharacterView";
-import { Column } from "../../Components/Container.tsx/Column";
+import { Column } from "../../Components/Container/Column";
 import { Character } from "../../../../Shared/Character/Character";
-import { Row } from "../../Components/Container.tsx/Row";
+import { Row } from "../../Components/Container/Row";
+import { httpCall } from "../../Helpers/FetchHelper";
 
 
 const fetchCharacter = async (id: number): Promise<Character> => {
-    const res = (await fetch(`http://localhost:8080/character/${id}/`)).json();
+    const res = await httpCall("GET", `${import.meta.env.VITE_API_URL}/character/${id}/`)
     return res;
 }
 

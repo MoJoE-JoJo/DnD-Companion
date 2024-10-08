@@ -1,5 +1,5 @@
 import { JSXElement } from "solid-js";
-import { Column } from "../Container.tsx/Column";
+import { Column } from "../Container/Column";
 
 
 export function Field(props: { value: JSXElement, underneath: JSXElement }): JSXElement {
