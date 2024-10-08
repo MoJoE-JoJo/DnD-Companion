@@ -4,6 +4,7 @@ import { Character } from "./../../../../Shared/Character/Character"
 import { Stats } from "./../../../../Shared/Character/Stats/Stats";
 import { AbilityScore } from "../../../../Shared/Character/Stats/Abilities";
 import { httpCall } from "../../Helpers/FetchHelper";
+import { LingeringInjuriesView } from "./LingeringInjuriesView";
 
 type CharacterViewProps = {
     id: number
@@ -61,6 +62,7 @@ export function CharacterView(props: CharacterViewProps): JSXElement {
         <Suspense fallback={<div>Loading...</div>}>
             <DetailsView characteristics={chell()?.characteristics} />
             <StatsView stats={chell()?.stats} />
+            <LingeringInjuriesView characterId={characterId()} lingeringInjuries={chell()?.lingeringInjuries}></LingeringInjuriesView>
         </Suspense>
     </>
 }
