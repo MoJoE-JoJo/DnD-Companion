@@ -1,5 +1,6 @@
 import { Alignment } from "../../../../Shared/Character/Characteristics/Alignment";
 import { Size } from "../../../../Shared/Character/Characteristics/Size";
+import { LingeringInjuryType } from "../../../../Shared/Character/LingeringInjury";
 import {Character } from "../../../../Shared/models";
 
 
@@ -96,7 +97,18 @@ function getChell() {
             savingThrows: undefined
         },
         exhaustionLevel: 3,
-        lingeringInjuries: undefined,
+        lingeringInjuries: [
+            {
+                type: LingeringInjuryType.HorribleScar,
+                source: "From Mr Sparks at ???",
+                visualDescription: "A long rend runs from the their lower beak down to their chin"
+            },
+            {
+                type: LingeringInjuryType.MinorScar,
+                source: "From Mr Sparks at ???",
+                visualDescription: "A long rend runs from the their lower beak down to their chin"
+            }
+        ],
         resources: undefined
     };
 }
