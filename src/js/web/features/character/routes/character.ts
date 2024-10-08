@@ -1,10 +1,10 @@
 // @ts-ignore
 import { Router } from 'express';
-import { getAllCharacters, getCharacterByID, getCharacterByName } from '../repos/characterRepo';
+import { getAllCharacters, getCharacter } from '../repos/characterRepo';
 const router = Router();
 
 router.get("/:id", (req, res) => {
-  res.json(getCharacterByID(req.params.id));
+  res.json(getCharacter(req.params.id));
 })
 
 router.get("/", (_, res) => {

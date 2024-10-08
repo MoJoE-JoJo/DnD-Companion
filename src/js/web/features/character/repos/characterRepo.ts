@@ -7,23 +7,28 @@ import { Alignment } from "../../../../Shared/Character/Characteristics/Alignmen
 
 const collectionString = "characters";
 
-export async function createCharacter(character: CharacterDB): Promise<CharacterDB> {
+export async function createCharacter(character: CharacterDB): Promise<CharacterDB | null> {
   var collection = await getCollection<CharacterDB>(collectionString);
   
-  const res = await collection.insertOne(character);
-  character._id = res.insertedId;
-  return character;
+  var existingChar = await collection.findOne({"characteristics.name": character.characteristics.name})
+    if(existingChar == null)
+    {
+        const res = await collection.insertOne(character);
+        character._id = res.insertedId;
+        return character;
+    }
+    return null;
 }
 
 export async function getCharacterByID(id: string) {
-  var collection = await getCollection<Character>(collectionString);
-  console.log(id);
-  return await collection.findOne({ _id: new ObjectId(id) });
+    var collection = await getCollection<Character>(collectionString);
+    console.log(id);
+    return await collection.findOne({ _id: new ObjectId(id) });
 }
 
 export async function getCharacterByName(name: string) {
     var collection = await getCollection<Character>(collectionString);
-    return await collection.findOne({ "details.name": name });
+    return await collection.findOne({ "characteristics.name": name });
   }
 
 export async function getAllCharacters()
@@ -34,8 +39,30 @@ export async function getAllCharacters()
     return characters;
 }
 
+export async function deleteCharacter(id: string) : Promise<boolean>
+{
+    var collection = await getCollection<Character>(collectionString);
+    var res = await collection.deleteOne({_id: new ObjectId(id)});
+    return res.acknowledged;
+}
 
-// ========= OLD TEMP DATA BELOW =========
+// ========= TEMP METHODS BELOW =========
+
+export function getCharacter(id: string): Character {
+    switch (id) {
+        case "0":
+            return getChell();
+        case "1":
+            return getBaseCharacter("Fleck");
+        case "2":
+            return getBaseCharacter("Rafan");
+        case "3":
+            return getBaseCharacter("Kasimir");
+        default:
+            return getChell();
+    }
+}
+
 
 function getBaseCharacter(name: string) : Character {
     return {
