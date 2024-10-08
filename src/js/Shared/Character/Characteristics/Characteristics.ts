@@ -5,10 +5,11 @@ import { Size } from "./Size";
 
 export type Characteristics = {
     name: string | undefined;
-    race: string | undefined;
+    species: string | undefined;
     age: number | undefined;
     size: Size | undefined;
     appearance: Appearance | undefined;
+    background: string | undefined;
     faith: string | null | undefined;
     alignment: Alignment | undefined;
     languages: Language[] | undefined;
