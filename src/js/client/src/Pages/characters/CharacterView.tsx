@@ -3,6 +3,7 @@ import { Characteristics } from "./../../../../Shared/Character/Characteristics/
 import { Character } from "./../../../../Shared/Character/Character"
 import { Stats } from "./../../../../Shared/Character/Stats/Stats";
 import { AbilityScore } from "../../../../Shared/Character/Stats/Abilities";
+import { httpCall } from "../../Helpers/FetchHelper";
 
 type CharacterViewProps = {
     id: number
