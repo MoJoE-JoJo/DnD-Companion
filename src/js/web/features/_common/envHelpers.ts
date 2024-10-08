@@ -7,7 +7,7 @@ export function getPort() {
 }
 
 export function getAuthDuration() {
-    return process.env.AUTH_DURATION as string;
+    return (process.env.AUTH_DURATION_IN_HOURS + "h") as string;
 }
 
 export function getAuthKey() {
