@@ -4,13 +4,7 @@ import styles from './App.module.css';
 import { CharacterPage } from './Pages/characters/CharacterPage';
 
 const App: Component = () => {
-  return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <CharacterPage />
-      </header>
-    </div>
-  );
+  return <CharacterPage />;
 };
 
 export default App;
