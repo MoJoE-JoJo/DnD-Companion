@@ -1,68 +1,79 @@
-import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
-import { Characteristics } from "./../../../../Shared/Character/Characteristics/Characteristics";
-import { Character } from "./../../../../Shared/Character/Character"
+import { JSXElement, Match, Switch } from "solid-js";
+import { Column } from "../../Components/Container/Column";
+import { Row } from "../../Components/Container/Row";
+import { Field } from "../../Components/Text/Field";
+import { Proficiency } from "../../../../Shared/Character/Stats/Proficiency";
+import { Checkbox } from "../../Components/Checkbox/Checkbox";
+import { Character, ClassLevel } from "./../../../../Shared/Character/Character"
 import { Stats } from "./../../../../Shared/Character/Stats/Stats";
-import { AbilityScore } from "../../../../Shared/Character/Stats/Abilities";
-import { httpCall } from "../../Helpers/FetchHelper";
 import { LingeringInjuriesView } from "./LingeringInjuriesView";
 
 type CharacterViewProps = {
-    id: number
+    character: Character
 }
 
-const fetchCharacter = async (id: number): Promise<Character> => {
-    const res = await httpCall("GET", `${import.meta.env.VITE_API_URL}/character/${id}/`)
-
-    console.log(res, id);
-
-    return res;
+function DetailsView(props: { character: Character }): JSXElement {
+    return <Column width="50%" style={{ "background-color": "gray", "border-radius": "20px", "padding-left": "10px", "margin-left": "10px", "margin-top": "10px" }} >
+        <Field value={props.character.characteristics.name} underneath={"Character name"} />
+        <Row>
+            <Field value={props.character.characteristics.background} underneath={"Background"} />
+            <ClassView classes={props.character.levels} />
+        </Row>
+        <Row>
+            <Field value={props.character.characteristics.species} underneath={"Species"} />
+            <Field value={props.character.characteristics.age} underneath={"Age"} />
+        </Row>
+    </Column>
 }
 
-function DetailsView(props: { characteristics: Characteristics | undefined }): JSXElement {
-    return <Show when={props.characteristics}>{details =>
-        <div>{details().name} is a {details().age} year old {details().race}.</div>
-    }</Show>
+function ClassView(props: { classes: ClassLevel[] }) {
+    return <Field value={props.classes.map(cl => cl.class + " " + cl.level).join(", ")} underneath={props.classes.length > 1 ? "Classes" : "Class"} />
 }
 
-function CalcModifier(statValue: number): number {
+function calcModifier(statValue: number): number {
     return Math.floor((statValue - 10) / 2)
 }
 
-function StatView(props: { statName: string, statValue: number }): JSXElement {
-    return <div>{props.statName} score: {props.statName}. Modifier: {props.statValue}</div>
+function StatView(props: { statName: string, statValue: number, savingThrow: Proficiency | undefined }): JSXElement {
+    return <Column>
+        {props.statName}
+        <Row>
+            <Field value={props.statValue} underneath={"Score"} />
+            <Field value={calcModifier(props.statValue)} underneath={"Modifier"} />
+            <Field value={<ProficiencyView proficiency={props.savingThrow ?? Proficiency.None} />} underneath="Saving throw" />
+        </Row>
+    </Column>
 }
 
+function ProficiencyView(props: { proficiency: Proficiency }) {
+    return <Switch>
+        <Match when={props.proficiency == Proficiency.None}>
+            <Checkbox />
+        </Match>
+        <Match when={props.proficiency == Proficiency.Proficient}>
+            <Checkbox checked />
+        </Match>
+        <Match when={props.proficiency == Proficiency.Expertise}>
+            <Checkbox checked customCheckmark="☑️" />
+        </Match>
+    </Switch>
+}
 
-function StatsView(props: { stats: Stats | undefined }): JSXElement {
-    return <Show when={props.stats}>{stats => <>
-        <StatView statName="Strength" statValue={stats().abilitieScores.strength} />
-        <StatView statName="Dexterity" statValue={stats().abilitieScores.dexterity} />
-        <StatView statName="Constitution" statValue={stats().abilitieScores.constitution} />
-        <StatView statName="Intelligence" statValue={stats().abilitieScores.intelligence} />
-        <StatView statName="Wisdom" statValue={stats().abilitieScores.wisdom} />
-        <StatView statName="Charisma" statValue={stats().abilitieScores.charisma} />
-    </>}</Show>
+function StatsView(props: { stats: Stats }): JSXElement {
+    return <Column width="50%" style={{ "background-color": "gray", "border-radius": "20px", "padding-left": "10px", "margin-left": "10px", "margin-top": "10px" }}>
+        <StatView statName="Strength" statValue={props.stats.abilitieScores.strength} savingThrow={props.stats.savingThrows?.strength} />
+        <StatView statName="Dexterity" statValue={props.stats.abilitieScores.dexterity} savingThrow={props.stats.savingThrows?.dexterity} />
+        <StatView statName="Constitution" statValue={props.stats.abilitieScores.constitution} savingThrow={props.stats.savingThrows?.constitution} />
+        <StatView statName="Intelligence" statValue={props.stats.abilitieScores.intelligence} savingThrow={props.stats.savingThrows?.intelligence} />
+        <StatView statName="Wisdom" statValue={props.stats.abilitieScores.wisdom} savingThrow={props.stats.savingThrows?.wisdom} />
+        <StatView statName="Charisma" statValue={props.stats.abilitieScores.charisma} savingThrow={props.stats.savingThrows?.charisma} />
+    </Column>;
 }
 
 export function CharacterView(props: CharacterViewProps): JSXElement {
-
-    const [characterId, setCharacterId] = createSignal(props.id);
-    const [chell] = createResource(characterId, fetchCharacter);
-
-    return <>
-        <select name="Character" onChange={(e) => {
-            const id = Number(e.currentTarget.value)
-            setCharacterId(id);
-        }}>
-            <option value={0}>Chell</option>
-            <option value={1}>Fleck</option>
-            <option value={2}>Rafan</option>
-            <option value={3}>Kasimir</option>
-        </select>
-        <Suspense fallback={<div>Loading...</div>}>
-            <DetailsView characteristics={chell()?.characteristics} />
-            <StatsView stats={chell()?.stats} />
-            <LingeringInjuriesView characterId={characterId()} lingeringInjuries={chell()?.lingeringInjuries}></LingeringInjuriesView>
-        </Suspense>
-    </>
+    return <Column height="100%" style={{ "justify-content": "space-between", "gap": "10px" }}>
+        <DetailsView character={props.character} />
+        <StatsView stats={props.character.stats} />
+        <LingeringInjuriesView lingeringInjuries={props.character.lingeringInjuries}></LingeringInjuriesView>
+    </Column>;
 }

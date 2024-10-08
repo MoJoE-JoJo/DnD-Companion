@@ -5,16 +5,13 @@ import styles from './App.module.css';
 import { JSXElement } from 'solid-js';
 import { Login } from './Pages/Login/Login';
 import { isLoggedIn } from './Helpers/FetchHelper';
+import { DndContextProvider } from './Components/context';
 
-function Root(props: { children?: JSXElement }) : JSXElement {
-  return <div class={styles.App}>
-    <header class={styles.header}>
-      {props.children}
-    </header>
-  </div>
+function Root(props: { children?: JSXElement }): JSXElement {
+  return <DndContextProvider>
+    {props.children}
+  </DndContextProvider>
 }
-
-
 
 const App = () => {
   return <Router root={Root}>
@@ -24,8 +21,8 @@ const App = () => {
   </Router>;
 };
 
-function handleLoginRedirect(url: string, component: JSXElement) : JSXElement {
-  const navigate = useNavigate(); 
+function handleLoginRedirect(url: string, component: JSXElement): JSXElement {
+  const navigate = useNavigate();
   const userLoggedIn = isLoggedIn();
   if (!userLoggedIn) {
     const newUrl = `/login?redirect=${url}`;

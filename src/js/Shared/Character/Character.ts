@@ -14,7 +14,7 @@ export type Character = {
     //conditions: ConditionSource[];
 }
 
-type ClassLevel = {
+export type ClassLevel = {
     class: string;
     level: number;
 }

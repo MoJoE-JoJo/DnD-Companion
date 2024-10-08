@@ -5,6 +5,7 @@ import { CharacterDB } from "../../../Database/Models/CharacterDb";
 import { Size } from "../../../../Shared/Character/Characteristics/Size";
 import { Alignment } from "../../../../Shared/Character/Characteristics/Alignment";
 import { LingeringInjuryType } from "../../../../Shared/Character/LingeringInjury";
+import { Proficiency } from "../../../../Shared/Character/Stats/Proficiency";
 const collectionString = "characters";
 
 export async function createCharacter(character: CharacterDB): Promise<CharacterDB | null> {
@@ -69,15 +70,16 @@ function getBaseCharacter(name: string) : Character {
     return {
         levels: [
             {
-                class:"fighter",
+                class: "Fighter",
                 level: 1,
             }
         ],
         characteristics: {
-            name: "PH",
-            race: undefined,
+            name: name,
+            species: undefined,
             age: 42,
             size: Size.Medium,
+            background: undefined,
             appearance: undefined,
             faith: undefined,
             alignment: Alignment.Neutral,
@@ -88,7 +90,7 @@ function getBaseCharacter(name: string) : Character {
             flaws: undefined,
         },
         stats: {
-            abilitieScores:{
+            abilitieScores: {
                 charisma: 10,
                 constitution: 10,
                 dexterity: 10,
@@ -107,20 +109,21 @@ function getBaseCharacter(name: string) : Character {
 }
 
 
-function getChell() {
+function getChell(): Character {
     return {
         levels: [
             {
-                class:"Druid",
+                class: "Druid",
                 level: 12,
             }
         ],
         characteristics: {
             name: "Chell",
-            race: "Tortle",
+            species: "Tortle",
             age: 12,
             size: Size.Medium,
             appearance: undefined,
+            background: "Hermit",
             faith: undefined,
             alignment: Alignment.Neutral,
             languages: undefined,
@@ -130,7 +133,7 @@ function getChell() {
             flaws: undefined,
         },
         stats: {
-            abilitieScores:{
+            abilitieScores: {
                 strength: 6,
                 dexterity: 10,
                 constitution: 18,
@@ -140,7 +143,14 @@ function getChell() {
             },
             armorClass: 10,
             skills: undefined,
-            savingThrows: undefined
+            savingThrows: {
+                strength: Proficiency.None,
+                charisma: Proficiency.None,
+                dexterity: Proficiency.None,
+                constitution: Proficiency.Proficient,
+                intelligence: Proficiency.Proficient,
+                wisdom: Proficiency.Expertise
+            }
         },
         exhaustionLevel: 3,
         lingeringInjuries: [

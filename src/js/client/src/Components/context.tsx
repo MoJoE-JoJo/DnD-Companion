@@ -1,15 +1,15 @@
 import { createContext, createSignal, JSXElement, useContext } from "solid-js";
 
-function useDndcContextProvider() {
-    return { };
+function useDndContextProvider() {
+    return {};
 }
 
-export type DndcContextModel = ReturnType<typeof useDndcContextProvider>;
+export type DndcContextModel = ReturnType<typeof useDndContextProvider>;
 
 const DndcContext = createContext<DndcContextModel | undefined>(undefined);
 
-export function DndcContextProvider(props: { children: JSXElement }) {
-    const value = useDndcContextProvider();
+export function DndContextProvider(props: { children: JSXElement }) {
+    const value = useDndContextProvider();
     return <DndcContext.Provider value={value}>
         {props.children}
     </DndcContext.Provider>;
@@ -17,10 +17,10 @@ export function DndcContextProvider(props: { children: JSXElement }) {
 
 export function safeDndcContext() {
     const context = useContext(DndcContext);
-    if (context === undefined) throw new Error("DndcContext must be used within a DndcContextProvider");
+    if (context === undefined) throw new Error("DndContext must be used within a DndContextProvider");
     return context;
 }
 
-export function useDndcContext() {    
+export function useDndcContext() {
     return safeDndcContext();
 }
