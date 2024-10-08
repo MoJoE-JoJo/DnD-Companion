@@ -1,4 +1,3 @@
-// @ts-ignore
 import { Router } from 'express';
 import { deleteCharacter, getAllCharacters, getCharacter as getMockCharacterData } from '../repos/characterRepo';
 const router = Router();

@@ -1,59 +1,58 @@
 import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
 import { Characteristics } from "./../../../../Shared/Character/Characteristics/Characteristics";
-import {Character} from "./../../../../Shared/Character/Character"
+import { Character } from "./../../../../Shared/Character/Character"
 import { Stats } from "./../../../../Shared/Character/Stats/Stats";
 import { AbilityScore } from "../../../../Shared/Character/Stats/Abilities";
+import { httpCall } from "../../Helpers/FetchHelper";
 import { LingeringInjuriesView } from "./LingeringInjuriesView";
 
 type CharacterViewProps = {
     id: number
 }
 
-const fetchCharacter = async (id : number): Promise<Character> => {
-
-    const res = (await fetch(`http://localhost:8080/character/${id}/`)).json();
+const fetchCharacter = async (id: number): Promise<Character> => {
+    const res = await httpCall("GET", `${import.meta.env.VITE_API_URL}/character/${id}/`)
 
     console.log(res, id);
 
     return res;
 }
 
-function DetailsView(props: {characteristics : Characteristics | undefined}) : JSXElement {
-    return <Show when={props.characteristics}>{details => 
+function DetailsView(props: { characteristics: Characteristics | undefined }): JSXElement {
+    return <Show when={props.characteristics}>{details =>
         <div>{details().name} is a {details().age} year old {details().race}.</div>
     }</Show>
 }
 
-function CalcModifier(statValue: number) : number {
+function CalcModifier(statValue: number): number {
     return Math.floor((statValue - 10) / 2)
 }
 
-function StatView(props: {statName: string, statValue: number}) : JSXElement {
+function StatView(props: { statName: string, statValue: number }): JSXElement {
     return <div>{props.statName} score: {props.statName}. Modifier: {props.statValue}</div>
 }
 
 
-function StatsView(props: {stats : Stats | undefined}) : JSXElement {
+function StatsView(props: { stats: Stats | undefined }): JSXElement {
     return <Show when={props.stats}>{stats => <>
-        <StatView statName="Strength" statValue={stats().abilitieScores.strength} /> 
-        <StatView statName="Dexterity" statValue={stats().abilitieScores.dexterity} /> 
-        <StatView statName="Constitution" statValue={stats().abilitieScores.constitution} /> 
-        <StatView statName="Intelligence" statValue={stats().abilitieScores.intelligence} /> 
-        <StatView statName="Wisdom" statValue={stats().abilitieScores.wisdom} /> 
-        <StatView statName="Charisma" statValue={stats().abilitieScores.charisma} /> 
+        <StatView statName="Strength" statValue={stats().abilitieScores.strength} />
+        <StatView statName="Dexterity" statValue={stats().abilitieScores.dexterity} />
+        <StatView statName="Constitution" statValue={stats().abilitieScores.constitution} />
+        <StatView statName="Intelligence" statValue={stats().abilitieScores.intelligence} />
+        <StatView statName="Wisdom" statValue={stats().abilitieScores.wisdom} />
+        <StatView statName="Charisma" statValue={stats().abilitieScores.charisma} />
     </>}</Show>
 }
 
-export function CharacterView(props : CharacterViewProps) : JSXElement {
+export function CharacterView(props: CharacterViewProps): JSXElement {
 
     const [characterId, setCharacterId] = createSignal(props.id);
     const [chell] = createResource(characterId, fetchCharacter);
-    
+
     return <>
         <select name="Character" onChange={(e) => {
             const id = Number(e.currentTarget.value)
             setCharacterId(id);
-            console.log(id)
         }}>
             <option value={0}>Chell</option>
             <option value={1}>Fleck</option>
@@ -65,5 +64,5 @@ export function CharacterView(props : CharacterViewProps) : JSXElement {
             <StatsView stats={chell()?.stats} />
             <LingeringInjuriesView characterId={characterId()} lingeringInjuries={chell()?.lingeringInjuries}></LingeringInjuriesView>
         </Suspense>
-    </> 
+    </>
 }
