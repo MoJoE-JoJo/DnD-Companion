@@ -1,8 +1,7 @@
+import { Character } from "@Models/Character/Character";
+import { Characteristics } from "@Models/Character/Characteristics/Characteristics";
+import { Stats } from "@Models/Character/Stats/Stats";
 import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
-import { Characteristics } from "./../../../../Shared/Character/Characteristics/Characteristics";
-import {Character} from "./../../../../Shared/Character/Character"
-import { Stats } from "./../../../../Shared/Character/Stats/Stats";
-import { AbilityScore } from "../../../../Shared/Character/Stats/Abilities";
 
 type CharacterViewProps = {
     id: number
