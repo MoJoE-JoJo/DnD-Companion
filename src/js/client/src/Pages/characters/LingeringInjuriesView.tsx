@@ -1,5 +1,6 @@
 import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
 import { LingeringInjury, LingeringInjuryDefinition } from "../../../../Shared/Character/LingeringInjury";
+import { Column } from "../../Components/Container/Column";
 
 type LingeringInjuriesViewProps = {
     lingeringInjuries: LingeringInjury[] | undefined
@@ -32,7 +33,7 @@ export function LingeringInjuriesView(props: LingeringInjuriesViewProps): JSXEle
         }) || [];
     };
 
-    return <>
+    return <Column width="50%">
         <div style={{ "background-color": "grey", "text-align": "left" }}>
             <div>
                 <h4 style={{ "margin": "8px 0", "display": "inline" }}>Lingering injuries</h4>
@@ -51,5 +52,5 @@ export function LingeringInjuriesView(props: LingeringInjuriesViewProps): JSXEle
                 )}
             </ul>
         </div>
-    </>
+    </Column>
 }

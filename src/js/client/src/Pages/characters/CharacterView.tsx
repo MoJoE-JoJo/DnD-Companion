@@ -71,7 +71,7 @@ function StatsView(props: { stats: Stats }): JSXElement {
 }
 
 export function CharacterView(props: CharacterViewProps): JSXElement {
-    return <Column height="100%" style={{ "justify-content": "space-between" }}>
+    return <Column height="100%" style={{ "justify-content": "space-between", "gap": "10px" }}>
         <DetailsView character={props.character} />
         <StatsView stats={props.character.stats} />
         <LingeringInjuriesView lingeringInjuries={props.character.lingeringInjuries}></LingeringInjuriesView>
