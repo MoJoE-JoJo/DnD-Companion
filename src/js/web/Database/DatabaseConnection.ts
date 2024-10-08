@@ -1,8 +1,7 @@
 import { Collection, MongoClient, Document } from "mongodb";
 
 export async function getCollection<T extends Document>(collectionName : string): Promise<Collection<T>> {
-  //TODO get connectionstring from some config one day.
-  const uri = "mongodb://localhost:27017";
+  const uri = process.env.MONGO_CONNECTIONSTRING ?? '';
   const mongoClient = await connectToCluster(uri);
   if (mongoClient == undefined) throw "connection to db was undefined";
 

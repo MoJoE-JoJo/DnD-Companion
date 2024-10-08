@@ -20,10 +20,11 @@ export async function createCharacter(character: CharacterDB): Promise<Character
     return null;
 }
 
-export async function getCharacterByID(id: string) {
+export async function getCharacterByID(id: string) : Promise<Character | null> {
     var collection = await getCollection<Character>(collectionString);
-    console.log(id);
-    return await collection.findOne({ _id: new ObjectId(id) });
+    
+    var res = await collection.findOne({ _id: new ObjectId(id) });
+    return res;
 }
 
 export async function getCharacterByName(name: string) {
@@ -48,7 +49,7 @@ export async function deleteCharacter(id: string) : Promise<boolean>
 
 // ========= TEMP METHODS BELOW =========
 
-export function getCharacter(id: string): Character {
+export async function getCharacter(id: string): Promise<Character | null> {
     switch (id) {
         case "0":
             return getChell();
