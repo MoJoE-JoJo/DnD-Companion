@@ -1,8 +1,14 @@
 import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import fs from "fs-extra";
 
 import characterRouter from "@Features/Character/Routes/Character";
+
+const sourceDirectory = '../client/src/Models';
+const targetDirectory = 'src/Models';
+
+fs.copySync(sourceDirectory, targetDirectory)
 
 dotenv.config();
 
