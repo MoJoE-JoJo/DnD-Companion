@@ -8,8 +8,6 @@ import loginRouter from "./features/authentication/routes/login";
 import authenticateToken from "./features/authentication/logic/authMiddleware";
 import { getPort } from "./features/_common/envHelpers";
 
-
-
 dotenv.config();
 
 const app: Express = express();
@@ -39,4 +37,3 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use("/", testRouter);
 app.use("/character", characterRouter);
-
