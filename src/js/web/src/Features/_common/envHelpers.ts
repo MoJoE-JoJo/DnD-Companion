@@ -13,3 +13,7 @@ export function getAuthDuration() {
 export function getAuthKey() {
     return process.env.AUTH_KEY as string;
 }
+
+export function getCopyModels(){
+    return process.env.COPY_MODELS ?? false 
+}

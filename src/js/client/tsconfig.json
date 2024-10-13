@@ -11,5 +11,12 @@
     "types": ["vite/client"],
     "noEmit": true,
     "isolatedModules": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@Models/*": ["Models/*"],
+      "@Components/*":["Components/*"],
+      "@Helpers/*":["Helpers/*"],
+      "@static/*":["../static/*"]
+    }
   },
 }
