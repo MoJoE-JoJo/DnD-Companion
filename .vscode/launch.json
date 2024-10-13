@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Launch Node.js Server (Debug)",
             "skipFiles": ["<node_internals>/**", "${workspaceFolder}/src/js/web/node_modules/**/*.js"],
             "program": "${workspaceFolder}/src/js/web/dist/app.js",
             "cwd": "${workspaceFolder}/src/js/web",

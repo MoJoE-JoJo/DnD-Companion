@@ -1,4 +1,4 @@
-import { CharacterPage } from './Pages/characters/CharacterPage';
+import { CharacterPage } from './Pages/Characters/CharacterPage';
 import { Navigate, redirect, Route, Router, useNavigate } from '@solidjs/router';
 
 import styles from './App.module.css';
