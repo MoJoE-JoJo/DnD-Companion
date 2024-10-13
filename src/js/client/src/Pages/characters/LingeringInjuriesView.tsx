@@ -1,6 +1,6 @@
-import { createResource, createSignal, JSXElement, Show, Suspense } from "solid-js";
-import { LingeringInjury, LingeringInjuryDefinition } from "../../../../Shared/Character/LingeringInjury";
-import { Column } from "../../Components/Container/Column";
+import { createResource, JSXElement } from "solid-js";
+import { LingeringInjury, LingeringInjuryDefinition } from "@Models/Character/LingeringInjury";
+import { Column } from "@Components/Container/Column";
 
 type LingeringInjuriesViewProps = {
     lingeringInjuries: LingeringInjury[] | undefined

@@ -1,9 +1,9 @@
-import { createResource, createSignal, JSXElement, Setter, Show, Suspense } from "solid-js";
+import { createResource, createSignal, JSXElement, Setter, Show } from "solid-js";
+import { Column } from "@Components/Container/Column";
+import { Row } from "@Components/Container/Row";
+import { httpCall } from "@Helpers/FetchHelper";
+import { Character } from "@Models/Character/Character";
 import { CharacterView } from "./CharacterView";
-import { Column } from "../../Components/Container/Column";
-import { Character } from "../../../../Shared/Character/Character";
-import { Row } from "../../Components/Container/Row";
-import { httpCall } from "../../Helpers/FetchHelper";
 
 
 const fetchCharacter = async (id: number): Promise<Character> => {

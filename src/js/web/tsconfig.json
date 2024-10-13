@@ -4,7 +4,8 @@
     "baseUrl": "./src",
     "paths": {
       "@Models/*": ["Models/*"],
-      "@Features/*":["Features/*",]
+      "@Features/*":["Features/*",],
+      "@Database/*":["Database/*"]
     },
     /* Visit https://aka.ms/tsconfig to read more about this file */
 

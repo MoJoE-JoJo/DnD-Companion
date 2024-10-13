@@ -2,10 +2,10 @@ import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import fs from "fs-extra";
-import characterRouter from "@Features/Character/Routes/Character";
+import characterRouter from "@Features/character/routes/character";
 import loginRouter from "@Features/authentication/routes/login";
+import { getCopyModels, getPort } from "@Features/_common/envHelpers";
 import authenticateToken from "@Features/authentication/logic/authMiddleware";
-import { getPort } from "@Features/_common/envHelpers";
 
 dotenv.config();
 
@@ -22,10 +22,15 @@ app.use(cors(corsOptions));
 
 const port = getPort() || 8080;
 
-const sourceDirectory = 'src/Models';
-const targetDirectory = '../client/src/Models';
 
-fs.copySync(sourceDirectory, targetDirectory)
+if(getCopyModels()){
+  console.log("Copying models to client directory: Started");
+  const sourceDirectory = 'src/Models';
+  const targetDirectory = '../client/src/Models';
+  
+  fs.copySync(sourceDirectory, targetDirectory)
+  console.log("Copying models to client directory: Finished");
+}
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

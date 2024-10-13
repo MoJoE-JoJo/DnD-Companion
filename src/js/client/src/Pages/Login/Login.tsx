@@ -1,6 +1,6 @@
 import { createSignal, JSXElement } from "solid-js";
-import { InputField } from "../../Components/InputField";
-import { httpCall } from "../../Helpers/FetchHelper";
+import { InputField } from "@Components/InputField";
+import { httpCall } from "@Helpers/FetchHelper";
 import { useNavigate } from "@solidjs/router";
 
 

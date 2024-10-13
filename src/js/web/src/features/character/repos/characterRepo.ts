@@ -1,11 +1,12 @@
-import { Character } from "@Models/Character/Character";
-import { Alignment } from "@Models/Character/Characteristics/Alignment";
-import { Size } from "@Models/Character/Characteristics/Size";
 import { ObjectId } from "mongodb";
-import { getCollection } from "../../../Database/DatabaseConnection";
-import { CharacterDB } from "../../../Database/Models/CharacterDb";
+import { getCollection } from "@Database/DatabaseConnection";
+import { CharacterDB } from "@Database/Models/CharacterDb";
+import { Character } from "@Models/Character/Character";
 import { LingeringInjuryType } from "@Models/Character/LingeringInjury";
 import { Proficiency } from "@Models/Character/Stats/Proficiency";
+import { Size } from "@Models/Character/Characteristics/Size";
+import { Alignment } from "@Models/Character/Characteristics/Alignment";
+
 const collectionString = "characters";
 
 export async function createCharacter(character: CharacterDB): Promise<CharacterDB | null> {

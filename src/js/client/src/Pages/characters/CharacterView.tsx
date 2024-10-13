@@ -1,12 +1,11 @@
 import { Character, ClassLevel } from "@Models/Character/Character";
-import { Characteristics } from "@Models/Character/Characteristics/Characteristics";
 import { Stats } from "@Models/Character/Stats/Stats";
-import { createResource, createSignal, JSXElement, Show, Suspense, Match, Switch } from "solid-js";
-import { Column } from "../../Components/Container/Column";
-import { Row } from "../../Components/Container/Row";
-import { Field } from "../../Components/Text/Field";
-import { Proficiency } from "@Models/Shared/Character/Stats/Proficiency";
-import { Checkbox } from "../../Components/Checkbox/Checkbox";
+import { JSXElement, Match, Switch } from "solid-js";
+import { Column } from "@Components/Container/Column";
+import { Row } from "@Components/Container/Row";
+import { Field } from "@Components/Text/Field";
+import { Checkbox } from "@Components/Checkbox/Checkbox";
+import { Proficiency } from "@Models/Character/Stats/Proficiency";
 import { LingeringInjuriesView } from "./LingeringInjuriesView";
 
 type CharacterViewProps = {
