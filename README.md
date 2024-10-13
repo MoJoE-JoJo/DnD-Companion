@@ -28,6 +28,16 @@ For VS Code, install the following extensions (will make development easier):
 - Prettier - Code formatter
 - Pretty Typescript Errors
 
+## Local Database
+Download and install -> https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-7.0.14-signed.msi
+use default for the whole install, ensure it runs on port **27017**
+
+It is easiest to manage when installing it as a Network Service.
+
+Would recommend also downloading Studio 3T -> https://studio3t.com/download/ to view the local database
+
+In Studio 3T, create a new connection, select to manually configure the connection, and use the default settings, no modifications required.
+
 ## Run the code
 
 To run locally start **both** the web and client with 
