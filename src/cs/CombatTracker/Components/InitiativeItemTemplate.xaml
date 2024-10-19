@@ -1,0 +1,19 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <DataTemplate x:Key="InitiativeItemTemplate">
+        <Frame BorderColor="LightGray"
+               Padding="10"
+               Margin="5">
+            <StackLayout>
+                <Label Text="{Binding Name}"
+                       FontSize="18"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding CurrentHealth, StringFormat='Health: {0}/{Binding MaxHealth}'}" />
+                <Label Text="{Binding InitiativeBonus, StringFormat='Initiative Bonus: +{0}'}" />
+                <Label Text="{Binding InitiativeRoll, StringFormat='Initiative Roll: {0}', FallbackValue='Not Rolled Yet'}" />
+                <Label Text="{Binding Description}"
+                       IsVisible="{Binding Description}" />
+            </StackLayout>
+        </Frame>
+    </DataTemplate>
+</ResourceDictionary>
