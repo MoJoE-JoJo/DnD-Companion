@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CombatTracker.MainPage">
     <ContentPage.Resources>
-        <ResourceDictionary Source="Components/InitiativeItemTemplate.xaml" />
+        <ResourceDictionary Source="src/Components/InitiativeItemTemplate.xaml" />
     </ContentPage.Resources>
     <ScrollView>
         <HorizontalStackLayout>
@@ -16,7 +16,8 @@
                                 ItemTemplate="{StaticResource InitiativeItemTemplate}" />
             </VerticalStackLayout>
             <VerticalStackLayout Padding="30,0"
-                                 Spacing="25">
+                                 Spacing="25"
+                                 BindingContext="{Binding RoundViewModel}">
                 <Label Text="{Binding RoundText}"
                        Style="{StaticResource Headline}"
                        SemanticProperties.HeadingLevel="Level1" />
@@ -36,7 +37,6 @@
                 <Button x:Name="CounterBtn"
                         Text="Click me"
                         SemanticProperties.Hint="Counts the number of times you click"
-                        Clicked="OnCounterClicked"
                         HorizontalOptions="Fill" />
             </VerticalStackLayout>
         </HorizontalStackLayout>
