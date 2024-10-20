@@ -8,7 +8,14 @@
                 <Label Text="{Binding Name}"
                        FontSize="18"
                        FontAttributes="Bold" />
-                <Label Text="{Binding CurrentHealth, StringFormat='Health: {0}/{Binding MaxHealth}'}" />
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding CurrentHealth, StringFormat='Health: {0}'}" />
+                            <Span Text="{Binding MaxHealth, StringFormat='/{0}'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
                 <Label Text="{Binding InitiativeBonus, StringFormat='Initiative Bonus: +{0}'}" />
                 <Label Text="{Binding InitiativeRoll, StringFormat='Initiative Roll: {0}', FallbackValue='Not Rolled Yet'}" />
                 <Label Text="{Binding Description}"

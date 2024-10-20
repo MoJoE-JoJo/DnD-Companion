@@ -1,43 +1,48 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CombatTracker.MainPage">
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CombatTracker.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Resources>
         <ResourceDictionary Source="src/Components/InitiativeItemTemplate.xaml" />
     </ContentPage.Resources>
     <ScrollView>
         <HorizontalStackLayout>
-            <VerticalStackLayout Padding="30,0"
-                                 Spacing="25">
-                <Label Text="Initiative List"
-                       Style="{StaticResource Headline}"
-                       SemanticProperties.HeadingLevel="Level1" />
-                <CollectionView ItemsSource="{Binding Participants}"
-                                ItemTemplate="{StaticResource InitiativeItemTemplate}" />
+            <VerticalStackLayout Padding="30,0" Spacing="25">
+                <Label
+                    SemanticProperties.HeadingLevel="Level1"
+                    Style="{StaticResource Headline}"
+                    Text="Initiative List" />
+                <CollectionView ItemTemplate="{StaticResource InitiativeItemTemplate}" ItemsSource="{Binding Participants}" />
             </VerticalStackLayout>
-            <VerticalStackLayout Padding="30,0"
-                                 Spacing="25"
-                                 BindingContext="{Binding RoundViewModel}">
-                <Label Text="{Binding RoundText}"
-                       Style="{StaticResource Headline}"
-                       SemanticProperties.HeadingLevel="Level1" />
-                <Button Text="Next Round"
-                        Command="{Binding NextRoundCommand}" />
-                <Image Source="dotnet_bot.png"
-                       HeightRequest="185"
-                       Aspect="AspectFit"
-                       SemanticProperties.Description="dot net bot in a race car number eight" />
-                <Label Text="Hello, World!"
-                       Style="{StaticResource Headline}"
-                       SemanticProperties.HeadingLevel="Level1" />
-                <Label Text="Welcome to &#xA;.NET Multi-platform App UI"
-                       Style="{StaticResource SubHeadline}"
-                       SemanticProperties.HeadingLevel="Level2"
-                       SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
-                <Button x:Name="CounterBtn"
-                        Text="Click me"
-                        SemanticProperties.Hint="Counts the number of times you click"
-                        HorizontalOptions="Fill" />
+            <VerticalStackLayout
+                Padding="30,0"
+                BindingContext="{Binding RoundViewModel}"
+                Spacing="25">
+                <Label
+                    SemanticProperties.HeadingLevel="Level1"
+                    Style="{StaticResource Headline}"
+                    Text="{Binding RoundText}" />
+                <Button Command="{Binding NextRoundCommand}" Text="Next Round" />
+                <Image
+                    Aspect="AspectFit"
+                    HeightRequest="185"
+                    SemanticProperties.Description="dot net bot in a race car number eight"
+                    Source="dotnet_bot.png" />
+                <Label
+                    SemanticProperties.HeadingLevel="Level1"
+                    Style="{StaticResource Headline}"
+                    Text="Hello, World!" />
+                <Label
+                    SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                    SemanticProperties.HeadingLevel="Level2"
+                    Style="{StaticResource SubHeadline}"
+                    Text="Welcome to &#xA;.NET Multi-platform App UI" />
+                <Button
+                    x:Name="CounterBtn"
+                    HorizontalOptions="Fill"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Text="Click me" />
             </VerticalStackLayout>
         </HorizontalStackLayout>
     </ScrollView>

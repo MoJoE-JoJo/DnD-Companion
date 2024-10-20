@@ -1,16 +1,17 @@
 ﻿
-using System.Collections.ObjectModel;
 using CombatTracker.Domain;
 using CombatTracker.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace CombatTracker;
 public partial class MainPage : ContentPage
 {
-    ObservableCollection<InititiativeItem> Participants { get; set; }
+    public ObservableCollection<InititiativeItem> Participants { get; set; }
+
 
     //Læs op på denne side med hvordan man nok bør gøre det: https://learn.microsoft.com/en-us/dotnet/maui/xaml/fundamentals/mvvm?view=net-maui-8.0
 
-    int CurrentParticipantIndex { get; set; }
+    public int CurrentParticipantIndex { get; set; }
 
     public RoundViewModel RoundViewModel { get; set; }
 

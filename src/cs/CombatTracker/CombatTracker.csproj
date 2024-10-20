@@ -62,4 +62,12 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <EditorConfigFiles Remove="C:\_repos\DnD-Companion\src\cs\CombatTracker\.editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="C:\_repos\DnD-Companion\src\cs\CombatTracker\.editorconfig" />
+	</ItemGroup>
+
 </Project>
