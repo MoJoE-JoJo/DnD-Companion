@@ -1,13 +1,14 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <DataTemplate x:Key="InitiativeItemTemplate">
-        <Frame BorderColor="LightGray"
-               Padding="10"
-               Margin="5">
+        <Frame
+            Margin="5"
+            Padding="10"
+            BorderColor="LightGray">
             <StackLayout>
-                <Label Text="{Binding Name}"
-                       FontSize="18"
-                       FontAttributes="Bold" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="{Binding Name}" />
                 <Label>
                     <Label.FormattedText>
                         <FormattedString>
@@ -16,10 +17,11 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+                <Label Text="{Binding HealthText}" />
+                <Button Command="{Binding AddHealthCommand}" Text="+" />
                 <Label Text="{Binding InitiativeBonus, StringFormat='Initiative Bonus: +{0}'}" />
                 <Label Text="{Binding InitiativeRoll, StringFormat='Initiative Roll: {0}', FallbackValue='Not Rolled Yet'}" />
-                <Label Text="{Binding Description}"
-                       IsVisible="{Binding Description}" />
+                <Label IsVisible="{Binding Description}" Text="{Binding Description}" />
             </StackLayout>
         </Frame>
     </DataTemplate>

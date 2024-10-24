@@ -1,6 +1,5 @@
-﻿
-namespace CombatTracker.Domain;
-public record InititiativeItem
+﻿namespace CombatTracker.Domain;
+public class Participant
 {
     public string Name { get; set; }
     public int InitiativeBonus { get; set; }
@@ -8,10 +7,10 @@ public record InititiativeItem
     public int MaxHealth { get; set; }
     public int CurrentHealth { get; set; }
     public int? FigureNumber { get; set; }
-    public string? Description { get; set; }
+    public string? Notes { get; set; }
     public int? InitiativeRoll { get; set; }
 
-    public InititiativeItem(string name, int bonus, InitiativeType type, int maxHealth, int? figureNumber = null, string? description = null)
+    public Participant(string name, int bonus, InitiativeType type, int maxHealth, int? figureNumber = null, string? notes = null)
     {
         Name = name;
         InitiativeBonus = bonus;
@@ -19,7 +18,7 @@ public record InititiativeItem
         MaxHealth = maxHealth;
         CurrentHealth = maxHealth;
         FigureNumber = figureNumber;
-        Description = description;
+        Notes = notes;
     }
 
 }
