@@ -1,5 +1,4 @@
-using CombatTracker.Domain;
-using System.Diagnostics;
+using CombatTracker.Models;
 using System.Windows.Input;
 
 namespace CombatTracker.ViewModels;
@@ -15,12 +14,20 @@ public class ParticipantViewModel : BaseViewModel
         set
         {
             SetProperty(Participant.CurrentHealth, value, val => Participant.CurrentHealth = val);
-
-            //SetProperty(Participant.CurrentHealth, value);
-            //OnPropertyChanged(); // Notify change for CurrentHealth
             OnPropertyChanged(nameof(HealthText)); // Notify change for CurrentHealth
-
         }
+    }
+
+    public int? InitiativeRoll
+    {
+        get => Participant.InitiativeRoll; // TODO Might need to change this to use a text field in the viewModel
+        set => SetProperty(Participant.CurrentHealth, value, val => Participant.InitiativeRoll = val);
+
+    }
+
+    public string Name
+    {
+        get => Participant.Name;
     }
 
     public string HealthText => $"Health: {Participant.CurrentHealth}/{Participant.MaxHealth}";
@@ -30,7 +37,9 @@ public class ParticipantViewModel : BaseViewModel
         Participant = participant;
     }
 
-    public ICommand AddHealthCommand => new Command(() => { CurrentHealth++; Debug.WriteLine(CurrentHealth); });
+    public ICommand AddHealthCommand => new Command(() => CurrentHealth++);
+    public ICommand RemoveHealthCommand => new Command(() => CurrentHealth--);
+
 
 
 }

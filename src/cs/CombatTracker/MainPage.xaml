@@ -4,46 +4,24 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Resources>
-        <ResourceDictionary Source="src/Components/InitiativeItemTemplate.xaml" />
+        <ResourceDictionary Source="src/Components/ParticipantListItem.xaml" />
+        <ResourceDictionary Source="src/Components/RoundTracker.xaml" />
     </ContentPage.Resources>
     <ScrollView>
         <HorizontalStackLayout>
             <VerticalStackLayout Padding="30,0" Spacing="25">
                 <Label
-                    SemanticProperties.HeadingLevel="Level1"
+                    x:Name="ParticipantListHeader"
+                    SemanticProperties.HeadingLevel="Level2"
                     Style="{StaticResource Headline}"
                     Text="Initiative List" />
-                <CollectionView ItemTemplate="{StaticResource InitiativeItemTemplate}" ItemsSource="{Binding Participants}" />
+                <CollectionView
+                    x:Name="ParticipantList"
+                    ItemTemplate="{StaticResource ParticipantListItem}"
+                    ItemsSource="{Binding GlobalStore.Participants}" 
+                    />
             </VerticalStackLayout>
-            <VerticalStackLayout
-                Padding="30,0"
-                BindingContext="{Binding RoundViewModel}"
-                Spacing="25">
-                <Label
-                    SemanticProperties.HeadingLevel="Level1"
-                    Style="{StaticResource Headline}"
-                    Text="{Binding RoundText}" />
-                <Button Command="{Binding NextRoundCommand}" Text="Next Round" />
-                <Image
-                    Aspect="AspectFit"
-                    HeightRequest="185"
-                    SemanticProperties.Description="dot net bot in a race car number eight"
-                    Source="dotnet_bot.png" />
-                <Label
-                    SemanticProperties.HeadingLevel="Level1"
-                    Style="{StaticResource Headline}"
-                    Text="Hello, World!" />
-                <Label
-                    SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                    SemanticProperties.HeadingLevel="Level2"
-                    Style="{StaticResource SubHeadline}"
-                    Text="Welcome to &#xA;.NET Multi-platform App UI" />
-                <Button
-                    x:Name="CounterBtn"
-                    HorizontalOptions="Fill"
-                    SemanticProperties.Hint="Counts the number of times you click"
-                    Text="Click me" />
-            </VerticalStackLayout>
+            <ContentView BindingContext="{Binding RoundTrackerViewModel}" ControlTemplate="{StaticResource RoundTracker}" />
         </HorizontalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -1,38 +1,30 @@
-﻿
-using CombatTracker.Domain;
+﻿using CombatTracker.src.Utilities;
 using CombatTracker.ViewModels;
-using System.Collections.ObjectModel;
 
 namespace CombatTracker;
 public partial class MainPage : ContentPage
 {
-    public ObservableCollection<ParticipantViewModel> Participants { get; set; }
+    public RoundTrackerViewModel RoundTrackerViewModel { get; set; }
+    public GlobalStore GlobalStore { get; private set; }
 
-
-    //Læs op på denne side med hvordan man nok bør gøre det: https://learn.microsoft.com/en-us/dotnet/maui/xaml/fundamentals/mvvm?view=net-maui-8.0
-
-    public int CurrentParticipantIndex { get; set; }
-
-    public RoundViewModel RoundViewModel { get; set; }
-
-
-    public MainPage()
+    public MainPage(RoundTrackerViewModel roundTracker, GlobalStore globalStore)
     {
         InitializeComponent();
 
-        RoundViewModel = new RoundViewModel();
+        GlobalStore = globalStore;
+        RoundTrackerViewModel = roundTracker;
 
-        Participants = new ObservableCollection<ParticipantViewModel>
-            {
-                new ParticipantViewModel(new Participant("Goblin", 2, InitiativeType.Enenmy, 30)),
-                new ParticipantViewModel(new Participant("Hero", 5, InitiativeType.Player, 50)),
-                new ParticipantViewModel(new Participant("Dragon", 8, InitiativeType.Enenmy, 200))
-            };
-        CurrentParticipantIndex = 0;
+        SizeChanged += OnPageSizeChanged;
 
         BindingContext = this;
     }
 
+    private void OnPageSizeChanged(object sender, EventArgs e)
+    {
+        double windowHeight = Window.Height;
+        ParticipantList.HeightRequest = windowHeight * 0.7;
+        ParticipantListHeader.HeightRequest = windowHeight * 0.1;
+    }
 
 }
 

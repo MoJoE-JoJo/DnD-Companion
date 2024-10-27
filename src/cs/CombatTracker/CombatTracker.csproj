@@ -70,4 +70,18 @@
 	  <None Include="C:\_repos\DnD-Companion\src\cs\CombatTracker\.editorconfig" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="src\Data\" />
+	  <Folder Include="src\Services\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="src\Components\AddParticipant.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="src\Components\RoundTracker.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

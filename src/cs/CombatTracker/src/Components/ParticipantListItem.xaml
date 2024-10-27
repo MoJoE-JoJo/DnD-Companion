@@ -1,5 +1,5 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <DataTemplate x:Key="InitiativeItemTemplate">
+    <DataTemplate x:Key="ParticipantListItem">
         <Frame
             Margin="5"
             Padding="10"
@@ -9,16 +9,11 @@
                     FontAttributes="Bold"
                     FontSize="18"
                     Text="{Binding Name}" />
-                <Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{Binding CurrentHealth, StringFormat='Health: {0}'}" />
-                            <Span Text="{Binding MaxHealth, StringFormat='/{0}'}" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
                 <Label Text="{Binding HealthText}" />
-                <Button Command="{Binding AddHealthCommand}" Text="+" />
+                <HorizontalStackLayout Spacing="5">
+                    <Button Command="{Binding RemoveHealthCommand}" Text="-" />
+                    <Button Command="{Binding AddHealthCommand}" Text="+" />
+                </HorizontalStackLayout>
                 <Label Text="{Binding InitiativeBonus, StringFormat='Initiative Bonus: +{0}'}" />
                 <Label Text="{Binding InitiativeRoll, StringFormat='Initiative Roll: {0}', FallbackValue='Not Rolled Yet'}" />
                 <Label IsVisible="{Binding Description}" Text="{Binding Description}" />

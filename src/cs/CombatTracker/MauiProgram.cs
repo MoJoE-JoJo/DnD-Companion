@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CombatTracker.src.Utilities;
+using CombatTracker.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace CombatTracker
 {
@@ -15,11 +17,21 @@ namespace CombatTracker
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.AddDependencyInjection();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
+
             return builder.Build();
+        }
+
+        public static void AddDependencyInjection(this MauiAppBuilder builder)
+        {
+            builder.Services.AddScoped<MainPage>();
+            builder.Services.AddTransient<RoundTrackerViewModel>();
+            builder.Services.AddSingleton<GlobalStore>();
         }
     }
 }

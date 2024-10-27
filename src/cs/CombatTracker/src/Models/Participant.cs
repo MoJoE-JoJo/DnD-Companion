@@ -1,4 +1,4 @@
-﻿namespace CombatTracker.Domain;
+﻿namespace CombatTracker.Models;
 public class Participant
 {
     public string Name { get; set; }
