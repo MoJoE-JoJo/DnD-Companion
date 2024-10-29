@@ -18,8 +18,8 @@
                 <CollectionView
                     x:Name="ParticipantList"
                     ItemTemplate="{StaticResource ParticipantListItem}"
-                    ItemsSource="{Binding GlobalStore.Participants}" 
-                    />
+                    ItemsSource="{Binding GlobalStore.Participants}"
+                    SelectionMode="Single" />
             </VerticalStackLayout>
             <ContentView BindingContext="{Binding RoundTrackerViewModel}" ControlTemplate="{StaticResource RoundTracker}" />
         </HorizontalStackLayout>

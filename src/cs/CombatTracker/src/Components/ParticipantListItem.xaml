@@ -18,6 +18,17 @@
                 <Label Text="{Binding InitiativeRoll, StringFormat='Initiative Roll: {0}', FallbackValue='Not Rolled Yet'}" />
                 <Label IsVisible="{Binding Description}" Text="{Binding Description}" />
             </StackLayout>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal" />
+                    <VisualState Name="Selected">
+                        <VisualState.Setters>
+                            <Setter Property="BorderColor" Value="Black" />
+                            <Setter Property="BackgroundColor" Value="LightYellow" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
         </Frame>
     </DataTemplate>
 </ResourceDictionary>
