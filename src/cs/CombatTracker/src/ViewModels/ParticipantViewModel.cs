@@ -25,6 +25,7 @@ public class ParticipantViewModel : BaseViewModel
     }
 
     public string Name { get => Participant.Name; }
+    public InitiativeType Type { get => Participant.Type; }
 
     public string HealthText => $"Health: {Participant.CurrentHealth}/{Participant.MaxHealth}";
 

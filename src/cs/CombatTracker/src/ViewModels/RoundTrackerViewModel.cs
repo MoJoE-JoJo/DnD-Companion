@@ -1,3 +1,4 @@
+using CombatTracker.Models;
 using CombatTracker.src.Utilities;
 using System.Windows.Input;
 
@@ -43,11 +44,11 @@ public class RoundTrackerViewModel : BaseViewModel
         }
 
         var sortedParticipants = GlobalStore.Participants
-            .Where(p => p.CurrentHealth > 0)
+            .Where(p => p.CurrentHealth > 0 || p.Type == InitiativeType.Player)
             .OrderByDescending(p => p.InitiativeRoll)
             .Concat(
                 GlobalStore.Participants
-                .Where(p => p.CurrentHealth <= 0)
+                .Where(p => p.CurrentHealth <= 0 && p.Type != InitiativeType.Player)
                 .OrderByDescending(p => p.InitiativeRoll)
             )
             .ToList();
