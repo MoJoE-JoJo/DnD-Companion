@@ -1,4 +1,7 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CombatTracker.src.Behaviours">
     <DataTemplate x:Key="ParticipantListItem">
         <Frame
             Margin="5"
@@ -9,14 +12,25 @@
                     FontAttributes="Bold"
                     FontSize="18"
                     Text="{Binding Name}" />
-                <Label Text="{Binding HealthText}" />
+                <Label Text="{Binding HealthText}" TextColor="{Binding HealthTextColor}" />
                 <HorizontalStackLayout Spacing="5">
-                    <Button Command="{Binding RemoveHealthCommand}" Text="-" />
-                    <Button Command="{Binding AddHealthCommand}" Text="+" />
+                    <Entry Placeholder="Number" Text="{Binding DamageHealingAmount, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <local:IntegerOnlyBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Button
+                        Command="{Binding RemoveHealthCommand}"
+                        CommandParameter="{Binding DamageHealingAmount}"
+                        Text="-" />
+                    <Button
+                        Command="{Binding AddHealthCommand}"
+                        CommandParameter="{Binding DamageHealingAmount}"
+                        Text="+" />
                 </HorizontalStackLayout>
-                <Label Text="{Binding InitiativeBonus, StringFormat='Initiative Bonus: +{0}'}" />
+                <!--<Label Text="{Binding InitiativeBonus, StringFormat='Initiative Bonus: +{0}'}" />-->
                 <Label Text="{Binding InitiativeRoll, StringFormat='Initiative Roll: {0}', FallbackValue='Not Rolled Yet'}" />
-                <Label IsVisible="{Binding Description}" Text="{Binding Description}" />
+                <!--<Label IsVisible="{Binding Description}" Text="{Binding Description}" />-->
             </StackLayout>
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup Name="CommonStates">

@@ -19,7 +19,7 @@
                     x:Name="ParticipantList"
                     ItemTemplate="{StaticResource ParticipantListItem}"
                     ItemsSource="{Binding GlobalStore.Participants}"
-                    SelectionMode="Single" />
+                    SelectionMode="Multiple" />
             </VerticalStackLayout>
             <ContentView BindingContext="{Binding RoundTrackerViewModel}" ControlTemplate="{StaticResource RoundTracker}" />
         </HorizontalStackLayout>

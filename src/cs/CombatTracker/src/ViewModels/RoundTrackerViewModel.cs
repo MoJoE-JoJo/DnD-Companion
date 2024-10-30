@@ -42,7 +42,17 @@ public class RoundTrackerViewModel : BaseViewModel
             pvm.InitiativeRoll = Random.Shared.Next(1, 21) + pvm.Participant.InitiativeBonus;
         }
 
-        var sortedParticipants = GlobalStore.Participants.OrderByDescending(p => p.InitiativeRoll).ToList();
+        var sortedParticipants = GlobalStore.Participants
+            .Where(p => p.CurrentHealth > 0)
+            .OrderByDescending(p => p.InitiativeRoll)
+            .Concat(
+                GlobalStore.Participants
+                .Where(p => p.CurrentHealth <= 0)
+                .OrderByDescending(p => p.InitiativeRoll)
+            )
+            .ToList();
+
+        sortedParticipants.ForEach(participant => participant.CurrentHealth = Math.Max(0, participant.CurrentHealth));
         GlobalStore.Participants.Clear();
         sortedParticipants.ForEach(GlobalStore.Participants.Add);
         //GlobalStore.Participants.ResumeNotifications();
