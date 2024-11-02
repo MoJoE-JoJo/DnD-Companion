@@ -1,0 +1,26 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CombatTracker.src.Behaviours">
+
+    <ControlTemplate x:Key="HealthDisplay">
+        <VerticalStackLayout>
+            <Label Text="{Binding HealthText}" TextColor="{Binding HealthTextColor}" />
+            <HorizontalStackLayout Spacing="5">
+                <Entry Placeholder="Number" Text="{Binding DamageHealingAmount, Mode=TwoWay}">
+                    <Entry.Behaviors>
+                        <local:IntegerOnlyBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <Button
+                    Command="{Binding RemoveHealthCommand}"
+                    CommandParameter="{Binding DamageHealingAmount}"
+                    Text="-" />
+                <Button
+                    Command="{Binding AddHealthCommand}"
+                    CommandParameter="{Binding DamageHealingAmount}"
+                    Text="+" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ControlTemplate>
+</ResourceDictionary>

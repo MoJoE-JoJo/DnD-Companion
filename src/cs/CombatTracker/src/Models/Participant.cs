@@ -9,6 +9,7 @@ public class Participant
     public int? FigureNumber { get; set; }
     public string? Notes { get; set; }
     public int? InitiativeRoll { get; set; }
+    public bool Surprised { get; set; }
 
     public Participant(string name, int bonus, InitiativeType type, int maxHealth, int? figureNumber = null, string? notes = null)
     {
@@ -19,6 +20,7 @@ public class Participant
         CurrentHealth = maxHealth;
         FigureNumber = figureNumber;
         Notes = notes;
+        Surprised = false;
     }
 
 }

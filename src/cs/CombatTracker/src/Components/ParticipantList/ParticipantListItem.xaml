@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="HealthDisplay.xaml" />
+        <ResourceDictionary Source="InitiativeDisplay.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="ParticipantListItem">
+        <Frame
+            Margin="5"
+            Padding="10"
+            BorderColor="LightGray">
+            <StackLayout Spacing="10">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="{Binding Name}" />
+                <ContentView ControlTemplate="{StaticResource HealthDisplay}" />
+                <ContentView ControlTemplate="{StaticResource InitiativeDisplay}" />
+            </StackLayout>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal" />
+                    <VisualState Name="Selected">
+                        <VisualState.Setters>
+                            <Setter Property="BorderColor" Value="Black" />
+                            <Setter Property="BackgroundColor" Value="LightYellow" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Frame>
+    </DataTemplate>
+</ResourceDictionary>

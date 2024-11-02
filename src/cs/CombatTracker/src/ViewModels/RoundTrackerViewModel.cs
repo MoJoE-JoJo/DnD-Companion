@@ -40,9 +40,19 @@ public class RoundTrackerViewModel : BaseViewModel
 
         foreach (var pvm in GlobalStore.Participants)
         {
-            pvm.InitiativeRoll = Random.Shared.Next(1, 21) + pvm.Participant.InitiativeBonus;
+            RollInitiative(pvm);
         }
 
+        var sortedParticipants = SortInitiatives();
+
+        sortedParticipants.ForEach(participant => participant.CurrentHealth = Math.Max(0, participant.CurrentHealth));
+        GlobalStore.Participants.Clear();
+        sortedParticipants.ForEach(GlobalStore.Participants.Add);
+        //GlobalStore.Participants.ResumeNotifications();
+    }
+
+    private List<ParticipantViewModel> SortInitiatives() // Should be in a service method
+    {
         var sortedParticipants = GlobalStore.Participants
             .Where(p => p.CurrentHealth > 0 || p.Type == InitiativeType.Player)
             .OrderByDescending(p => p.InitiativeRoll)
@@ -52,11 +62,20 @@ public class RoundTrackerViewModel : BaseViewModel
                 .OrderByDescending(p => p.InitiativeRoll)
             )
             .ToList();
-
-        sortedParticipants.ForEach(participant => participant.CurrentHealth = Math.Max(0, participant.CurrentHealth));
-        GlobalStore.Participants.Clear();
-        sortedParticipants.ForEach(GlobalStore.Participants.Add);
-        //GlobalStore.Participants.ResumeNotifications();
+        return sortedParticipants;
     }
 
+    private void RollInitiative(ParticipantViewModel pvm)
+    {
+        var surprised = pvm.Surprised;
+        if (surprised)
+        {
+            pvm.InitiativeRoll = Dice.RollWithDisadvantage(pvm.Participant.InitiativeBonus);
+            pvm.Surprised = false;
+        }
+        else
+        {
+            pvm.InitiativeRoll = Dice.Roll(DiceType.d20, pvm.Participant.InitiativeBonus);
+        }
+    }
 }

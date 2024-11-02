@@ -76,7 +76,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="src\Components\AddParticipant.xaml">
+	  <MauiXaml Update="src\Components\ParticipantList\HealthDisplay.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="src\Components\ParticipantList\InitiativeDisplay.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="src\Components\RoundTracker.xaml">

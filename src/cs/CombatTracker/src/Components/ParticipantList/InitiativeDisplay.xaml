@@ -1,0 +1,15 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CombatTracker.src.Behaviours">
+
+    <ControlTemplate x:Key="InitiativeDisplay">
+        <VerticalStackLayout Spacing="-10">
+            <Label Text="{Binding InitiativeRoll, StringFormat='Initiative Roll: {0}', FallbackValue='Not Rolled Yet'}" />
+            <HorizontalStackLayout Spacing="-10">
+                <CheckBox Margin="-5,0,0,0" IsChecked="{Binding Surprised, Mode=TwoWay}" />
+                <Label Text="Surprised" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ControlTemplate>
+</ResourceDictionary>

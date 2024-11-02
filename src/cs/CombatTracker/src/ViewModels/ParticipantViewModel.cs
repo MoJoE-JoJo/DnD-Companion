@@ -43,6 +43,12 @@ public class ParticipantViewModel : BaseViewModel
         set => SetProperty(ref _damageHealingAmount, value);
     }
 
+    public bool Surprised
+    {
+        get => Participant.Surprised;
+        set => SetProperty(Participant.Surprised, value, val => Participant.Surprised = val);
+    }
+
     public ParticipantViewModel(Participant participant)
     {
         Participant = participant;
