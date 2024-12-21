@@ -11,13 +11,20 @@ public class Participant
     public int? InitiativeRoll { get; set; }
     public bool Surprised { get; set; }
 
-    public Participant(string name, int bonus, InitiativeType type, int maxHealth, int? figureNumber = null, string? notes = null)
+    public Participant(
+        string name,
+        int initiativeBonus,
+        InitiativeType type,
+        int maxHealth,
+        int? currentHealth = null,
+        int? figureNumber = null,
+        string? notes = null)
     {
         Name = name;
-        InitiativeBonus = bonus;
+        InitiativeBonus = initiativeBonus;
         Type = type;
         MaxHealth = maxHealth;
-        CurrentHealth = maxHealth;
+        CurrentHealth = currentHealth == null ? maxHealth : currentHealth.Value;
         FigureNumber = figureNumber;
         Notes = notes;
         Surprised = false;

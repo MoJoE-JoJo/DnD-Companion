@@ -5,14 +5,16 @@ namespace CombatTracker;
 public partial class MainPage : ContentPage
 {
     public RoundTrackerViewModel RoundTrackerViewModel { get; set; }
+    public ParticipantListViewModel ParticipantListViewModel { get; set; }
     public GlobalStore GlobalStore { get; private set; }
 
-    public MainPage(RoundTrackerViewModel roundTracker, GlobalStore globalStore)
+    public MainPage(RoundTrackerViewModel roundTracker, ParticipantListViewModel participantListViewModel, GlobalStore globalStore)
     {
         InitializeComponent();
 
         GlobalStore = globalStore;
         RoundTrackerViewModel = roundTracker;
+        ParticipantListViewModel = participantListViewModel;
 
         SizeChanged += OnPageSizeChanged;
 
@@ -21,9 +23,7 @@ public partial class MainPage : ContentPage
 
     private void OnPageSizeChanged(object sender, EventArgs e)
     {
-        double windowHeight = Window.Height;
-        ParticipantList.HeightRequest = windowHeight * 0.7;
-        ParticipantListHeader.HeightRequest = windowHeight * 0.1;
+        GlobalStore.WindowHeight = Window.Height;
     }
 
 }

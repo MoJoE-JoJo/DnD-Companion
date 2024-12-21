@@ -31,6 +31,7 @@ namespace CombatTracker
         {
             builder.Services.AddScoped<MainPage>();
             builder.Services.AddTransient<RoundTrackerViewModel>();
+            builder.Services.AddTransient<ParticipantListViewModel>();
             builder.Services.AddSingleton<GlobalStore>();
         }
     }

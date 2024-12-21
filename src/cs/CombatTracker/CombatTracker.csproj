@@ -82,6 +82,9 @@
 	  <MauiXaml Update="src\Components\ParticipantList\InitiativeDisplay.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="src\Components\ParticipantList\ParticipantList.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="src\Components\RoundTracker.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

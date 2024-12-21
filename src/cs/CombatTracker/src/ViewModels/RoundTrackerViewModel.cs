@@ -7,6 +7,7 @@ namespace CombatTracker.ViewModels;
 public class RoundTrackerViewModel : BaseViewModel
 {
     private GlobalStore GlobalStore { get; set; }
+
     private int _round;
 
     public int Round
@@ -31,51 +32,62 @@ public class RoundTrackerViewModel : BaseViewModel
     {
         Round++;
         UpdateInitiative();
-        //GlobalStore.AddParticipant(new Participant("Dragon", 8, InitiativeType.Enenmy, 200));
     });
 
     public void UpdateInitiative()
     {
-        //GlobalStore.Participants.SuspendNotifications();
-
-        foreach (var pvm in GlobalStore.Participants)
+        foreach (var participant in GlobalStore.Participants)
         {
-            RollInitiative(pvm);
+            RollInitiative(participant);
         }
 
-        var sortedParticipants = SortInitiatives();
-
-        sortedParticipants.ForEach(participant => participant.CurrentHealth = Math.Max(0, participant.CurrentHealth));
-        GlobalStore.Participants.Clear();
-        sortedParticipants.ForEach(GlobalStore.Participants.Add);
-        //GlobalStore.Participants.ResumeNotifications();
+        SortInitiatives();
+        GlobalStore.Participants.ForEach(participant => participant.CurrentHealth = Math.Max(0, participant.CurrentHealth));
+        GlobalStore.InvokeInitiativeRolled();
     }
 
-    private List<ParticipantViewModel> SortInitiatives() // Should be in a service method
+    private void SortInitiatives() // Should be in a service method
     {
-        var sortedParticipants = GlobalStore.Participants
-            .Where(p => p.CurrentHealth > 0 || p.Type == InitiativeType.Player)
-            .OrderByDescending(p => p.InitiativeRoll)
-            .Concat(
-                GlobalStore.Participants
-                .Where(p => p.CurrentHealth <= 0 && p.Type != InitiativeType.Player)
-                .OrderByDescending(p => p.InitiativeRoll)
-            )
-            .ToList();
-        return sortedParticipants;
+        GlobalStore.Participants.Sort((p1, p2) =>
+        {
+            int priorityComparison = GetPriority(p2) - GetPriority(p1);
+            if (priorityComparison != 0)
+                return priorityComparison;
+
+            // Secondary sort: Sort by InitiativeRoll in descending order
+            return CompareNullableInts(p2.InitiativeRoll, p1.InitiativeRoll);
+        });
     }
 
-    private void RollInitiative(ParticipantViewModel pvm)
+    // Helper method to determine the priority of a participant
+    static int GetPriority(Participant p)
     {
-        var surprised = pvm.Surprised;
+        if (p.CurrentHealth > 0 || p.Type == InitiativeType.Player)
+            return 1; // High priority
+        return 0; // Low priority
+    }
+    static int CompareNullableInts(int? a, int? b)
+    {
+        if (a.HasValue && b.HasValue)
+            return a.Value - b.Value; // Compare actual values
+        if (a.HasValue)
+            return -1; // Non-null values come before null
+        if (b.HasValue)
+            return 1; // Null values come after non-null
+        return 0; // Both are null, they are equal
+    }
+
+    private void RollInitiative(Participant participant)
+    {
+        var surprised = participant.Surprised;
         if (surprised)
         {
-            pvm.InitiativeRoll = Dice.RollWithDisadvantage(pvm.Participant.InitiativeBonus);
-            pvm.Surprised = false;
+            participant.InitiativeRoll = Dice.RollWithDisadvantage(participant.InitiativeBonus);
+            participant.Surprised = false;
         }
         else
         {
-            pvm.InitiativeRoll = Dice.Roll(DiceType.d20, pvm.Participant.InitiativeBonus);
+            participant.InitiativeRoll = Dice.Roll(DiceType.d20, participant.InitiativeBonus);
         }
     }
 }

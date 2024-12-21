@@ -3,10 +3,18 @@ using System.Windows.Input;
 
 namespace CombatTracker.ViewModels;
 
-public class ParticipantViewModel : BaseViewModel
+public class ParticipantListItemViewModel : BaseViewModel
 {
-
-    public Participant Participant { get; private set; }
+    private Participant _participant;
+    public Participant Participant
+    {
+        get => _participant;
+        set
+        {
+            _participant = value;
+            OnPropertyChanged(string.Empty);
+        }
+    }
 
     public int CurrentHealth
     {
@@ -15,13 +23,14 @@ public class ParticipantViewModel : BaseViewModel
         {
             SetProperty(Participant.CurrentHealth, value, val => Participant.CurrentHealth = val);
             OnPropertyChanged(nameof(HealthText)); // Notify change for CurrentHealth
+            OnPropertyChanged(nameof(HealthTextColor)); // Notify change for CurrentHealth
         }
     }
 
     public int? InitiativeRoll
     {
         get => Participant.InitiativeRoll; // TODO Might need to change this to use a text field in the viewModel
-        set => SetProperty(Participant.CurrentHealth, value, val => Participant.InitiativeRoll = val);
+        set => SetProperty(-1, value, val => Participant.InitiativeRoll = val);
     }
 
     public string Name { get => Participant.Name; }
@@ -29,12 +38,7 @@ public class ParticipantViewModel : BaseViewModel
 
     public string HealthText => $"Health: {Participant.CurrentHealth}/{Participant.MaxHealth}";
 
-    private string _healthTextColor = "Black";
-    public string HealthTextColor
-    {
-        get => _healthTextColor;
-        set => SetProperty(ref _healthTextColor, value);
-    }
+    public string HealthTextColor { get => GetHealthColor(); }
 
     private string _damageHealingAmount;
     public string DamageHealingAmount
@@ -49,7 +53,7 @@ public class ParticipantViewModel : BaseViewModel
         set => SetProperty(Participant.Surprised, value, val => Participant.Surprised = val);
     }
 
-    public ParticipantViewModel(Participant participant)
+    public ParticipantListItemViewModel(Participant participant)
     {
         Participant = participant;
     }
@@ -59,8 +63,8 @@ public class ParticipantViewModel : BaseViewModel
         if (int.TryParse(amount, out int intAmount) && CurrentHealth < Participant.MaxHealth)
         {
             CurrentHealth += intAmount;
+            CurrentHealth = Math.Min(Participant.MaxHealth, CurrentHealth);
             DamageHealingAmount = "";
-            UpdateHealthColor();
         }
     });
     public ICommand RemoveHealthCommand => new Command<string>((string amount) =>
@@ -69,15 +73,14 @@ public class ParticipantViewModel : BaseViewModel
         {
             CurrentHealth -= intAmount;
             DamageHealingAmount = "";
-            UpdateHealthColor();
         }
     }
     );
 
-    private void UpdateHealthColor()
+    private string GetHealthColor()
     {
         var percentageHealth = (double)Participant.CurrentHealth / Participant.MaxHealth;
-        HealthTextColor = percentageHealth switch
+        return percentageHealth switch
         {
             > 0.5 => "Black",
             <= 0.5 and > 0.25 => "Orange",
@@ -86,6 +89,5 @@ public class ParticipantViewModel : BaseViewModel
             _ => "Grey"
         };
     }
-
 
 }

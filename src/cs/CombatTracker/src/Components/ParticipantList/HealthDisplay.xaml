@@ -7,11 +7,17 @@
         <VerticalStackLayout>
             <Label Text="{Binding HealthText}" TextColor="{Binding HealthTextColor}" />
             <HorizontalStackLayout Spacing="5">
-                <Entry Placeholder="Number" Text="{Binding DamageHealingAmount, Mode=TwoWay}">
-                    <Entry.Behaviors>
-                        <local:IntegerOnlyBehavior />
-                    </Entry.Behaviors>
-                </Entry>
+                <StackLayout WidthRequest="96">
+                    <Entry
+                        ClearButtonVisibility="WhileEditing"
+                        HorizontalOptions="Fill"
+                        Placeholder="Number"
+                        Text="{Binding DamageHealingAmount, Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <local:IntegerOnlyBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
                 <Button
                     Command="{Binding RemoveHealthCommand}"
                     CommandParameter="{Binding DamageHealingAmount}"

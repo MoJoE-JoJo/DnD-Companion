@@ -1,0 +1,27 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ParticipantListItem.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <ControlTemplate x:Key="ParticipantList">
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+            <Label
+                x:Name="ParticipantListHeader"
+                HeightRequest="42"
+                SemanticProperties.HeadingLevel="Level2"
+                Style="{StaticResource Headline}"
+                Text="Initiative List" />
+            <CollectionView
+                x:Name="ParticipantList"
+                HeightRequest="{Binding ParticipantListCollectionHeight}"
+                ItemTemplate="{StaticResource ParticipantListItem}"
+                ItemsSource="{Binding Participants}"
+                SelectionMode="Multiple">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="2" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ControlTemplate>
+</ResourceDictionary>

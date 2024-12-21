@@ -4,23 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentPage.Resources>
-        <ResourceDictionary Source="src/Components/ParticipantList/ParticipantListItem.xaml" />
+        <ResourceDictionary Source="src/Components/ParticipantList/ParticipantList.xaml" />
         <ResourceDictionary Source="src/Components/RoundTracker.xaml" />
     </ContentPage.Resources>
     <ScrollView>
         <HorizontalStackLayout>
-            <VerticalStackLayout Padding="30,0" Spacing="25">
-                <Label
-                    x:Name="ParticipantListHeader"
-                    SemanticProperties.HeadingLevel="Level2"
-                    Style="{StaticResource Headline}"
-                    Text="Initiative List" />
-                <CollectionView
-                    x:Name="ParticipantList"
-                    ItemTemplate="{StaticResource ParticipantListItem}"
-                    ItemsSource="{Binding GlobalStore.Participants}"
-                    SelectionMode="Multiple" />
-            </VerticalStackLayout>
+            <ContentView BindingContext="{Binding ParticipantListViewModel}" ControlTemplate="{StaticResource ParticipantList}" />
             <ContentView BindingContext="{Binding RoundTrackerViewModel}" ControlTemplate="{StaticResource RoundTracker}" />
         </HorizontalStackLayout>
     </ScrollView>
