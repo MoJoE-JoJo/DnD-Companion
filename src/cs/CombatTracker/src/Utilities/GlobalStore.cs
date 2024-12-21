@@ -27,17 +27,6 @@ public class GlobalStore
 
     public GlobalStore()
     {
-        //Participants = new ObservableCollection<ParticipantViewModel>
-        //    {
-        //        new ParticipantViewModel(new Participant("Arthur", 2, InitiativeType.Player, 19)),
-        //        new ParticipantViewModel(new Participant("Jett", -1, InitiativeType.Player, 15)),
-        //        new ParticipantViewModel(new Participant("Haaldwiin", 5, InitiativeType.Player, 15)),
-        //        new ParticipantViewModel(new Participant("Ricket", 0, InitiativeType.Player, 14)),
-        //        new ParticipantViewModel(new Participant("Skeleton Minotaur", 0, InitiativeType.Enenmy, 67)),
-        //        //new ParticipantViewModel(new Participant("Gnoll, 2", 1, InitiativeType.Enenmy, 22)),
-        //        //new ParticipantViewModel(new Participant("Gnoll, 3", 1, InitiativeType.Enenmy, 22)),
-        //        //new ParticipantViewModel(new Participant("Gnoll, 4", 1, InitiativeType.Enenmy, 22)),
-        //    };
         Participants = new List<Participant>
             {
                 new Participant(
